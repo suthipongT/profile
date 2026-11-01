@@ -31,6 +31,9 @@ const navItems = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#07121c" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <meta name="description" content={pageDescription} />
     <meta name="robots" content={preview ? 'noindex, nofollow, noarchive' : 'index, follow'} />
     <title>{pageTitle}</title>
@@ -59,11 +62,11 @@ const navItems = [
       <header class="site-header">
         <div class="container header-inner">
           <a class="brand" href={currentPath} aria-label={locale === 'en' ? 'Suthipong, home' : 'Suthipong, หน้าหลัก'}>
-            <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
+            <span class="brand-mark" aria-hidden="true">ST<span>.</span></span>
             <span class="brand-name">SUTHIPONG<span class="brand-dot">.</span></span>
           </a>
           <nav class="desktop-nav" aria-label={locale === 'en' ? 'Primary navigation' : 'เมนูหลัก'}>
-            {navItems.map(([id, label]) => <a href={`${currentPath}#${id}`}>{label}</a>)}
+            {navItems.filter(([id]) => id !== 'contact').map(([id, label]) => <a href={`${currentPath}#${id}`}>{label}</a>)}
           </nav>
           <div class="header-actions">
             <nav class="language-switch" aria-label={locale === 'en' ? 'Language' : 'ภาษา'}>
@@ -71,6 +74,7 @@ const navItems = [
               <span aria-hidden="true">/</span>
               <a href={thPath} lang="th" aria-current={locale === 'th' ? 'page' : undefined}>TH</a>
             </nav>
+            <a class="header-contact" href={`${currentPath}#contact`} aria-label={t.headerAction}><span>{t.headerAction}</span><b aria-hidden="true">↗</b></a>
             <details class="mobile-nav">
               <summary aria-label={t.mobileMenu}>
                 <span></span><span></span><span></span>
@@ -96,7 +100,26 @@ const navItems = [
         menu.querySelectorAll<HTMLAnchorElement>('nav a').forEach((link) => {
           link.addEventListener('click', () => { menu.open = false; });
         });
+        menu.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && menu.open) {
+            menu.open = false;
+            menu.querySelector('summary')?.focus();
+          }
+        });
       });
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const element = entry.target as HTMLElement;
+            window.setTimeout(() => element.classList.add('is-revealed'), 900);
+            element.classList.add('will-reveal');
+            requestAnimationFrame(() => element.classList.add('is-revealed'));
+            observer.unobserve(element);
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+        document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((element) => observer.observe(element));
+      }
     </script>
   </body>
 </html>

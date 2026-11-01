@@ -12,7 +12,7 @@ const [lead, ...supporting] = project.screenshots ?? [];
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const imageSrc = (src: string) => src.startsWith(base) ? src : `${base}${src.replace(/^\//, '')}`;
 ---
-<article class:list={['project-showcase', { 'project-showcase-text': !lead }]} data-demo-project={demo ? project.id : undefined}>
+<article class:list={['project-showcase', { 'project-showcase-text': !lead, 'project-showcase-featured': priority }]} data-demo-project={demo ? project.id : undefined} data-reveal>
   {lead && <div class="project-media">
     <figure>
       {lead.image.format === 'svg'

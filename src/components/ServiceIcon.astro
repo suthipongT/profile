@@ -1,0 +1,11 @@
+---
+import type { ProjectCategory } from '../content/projects';
+interface Props { category: ProjectCategory }
+const { category } = Astro.props;
+---
+<svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  {category === 'corporate-website' && <><rect x="6" y="9" width="36" height="29" rx="3"/><path d="M6 17h36M12 13h1m5 0h1m5 0h1M12 25h12m-12 6h19M32 24h5v7h-5z"/></>}
+  {category === 'crm' && <><circle cx="15" cy="14" r="4"/><circle cx="34" cy="15" r="4"/><circle cx="24" cy="34" r="4"/><path d="M18.5 16.5 30 16m-13 2 5 12m10-11-6 11M8 25c3-2 7-3 11-2m15 0c3 0 5 1 7 3"/></>}
+  {category === 'cms' && <><rect x="8" y="7" width="32" height="34" rx="3"/><path d="M14 15h20M14 21h9M14 27h20M14 33h14"/><circle cx="31" cy="21" r="2"/></>}
+  {category === 'erp-business-management' && <><rect x="7" y="7" width="13" height="13" rx="2"/><rect x="28" y="7" width="13" height="13" rx="2"/><rect x="7" y="28" width="13" height="13" rx="2"/><rect x="28" y="28" width="13" height="13" rx="2"/><path d="M20 13.5h8m-14.5 6.5v8M34.5 20v8M20 34.5h8"/></>}
+</svg>

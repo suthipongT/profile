@@ -9,8 +9,10 @@ type TechnologyGroup = { title: string; items: string[] };
 type Copy = {
   nav: { work: string; services: string; technology: string; process: string; about: string; contact: string };
   categoryLabels: Record<ProjectCategory, string>;
-  heroEyebrow: string; heroTitle: string; heroDescription: string; heroCapabilitiesLabel: string;
-  primaryAction: string; secondaryAction: string;
+  heroEyebrow: string; heroTitleLead: string; heroTitleFocus: string; heroDescription: string; heroFootnote: string;
+  heroVisualWebsiteLabel: string; heroVisualWebsiteTitle: string; heroVisualWebsiteAction: string;
+  heroVisualSystemLabel: string; heroVisualSystemTitle: string; heroVisualSteps: string[]; heroVisualEdgeLabel: string;
+  primaryAction: string; secondaryAction: string; headerAction: string;
   workKicker: string; workTitle: string; workIntro: string; workEmptyTitle: string; workEmptyBody: string;
   previewBanner: string; previewTitlePrefix: string; previewMetaDescription: string;
   previewWorkIntro: string; previewWorkNotice: string; demoProjectLabel: string;
@@ -33,11 +35,13 @@ export const copy: Record<Locale, Copy> = {
       'erp-business-management': 'ERP / business management',
     },
     heroEyebrow: 'INDEPENDENT SOFTWARE DEVELOPMENT',
-    heroTitle: 'Websites and business software, built with purpose.',
-    heroDescription: 'I’m Suthipong Toonritsa. I work with clients on clear, usable digital tools shaped around their business needs.',
-    heroCapabilitiesLabel: 'What I can build',
-    primaryAction: 'View selected work', secondaryAction: 'Contact',
-    workKicker: '01 / SELECTED WORK', workTitle: 'The work, in context.',
+    heroTitleLead: 'Corporate websites.', heroTitleFocus: 'Custom business software.',
+    heroDescription: 'I help turn business requirements into clear web experiences and practical software interfaces — from a public website to the workflows behind it.',
+    heroFootnote: 'WEBSITES  /  CRM  /  CMS  /  ERP',
+    heroVisualWebsiteLabel: 'WEBSITE CONCEPT', heroVisualWebsiteTitle: 'A clearer way forward.', heroVisualWebsiteAction: 'Explore services',
+    heroVisualSystemLabel: 'BUSINESS SYSTEM', heroVisualSystemTitle: 'Connected workflows', heroVisualSteps: ['Inquiry', 'Review', 'Handover'], heroVisualEdgeLabel: 'WEB / SYSTEMS / WORKFLOWS',
+    primaryAction: 'Explore work', secondaryAction: 'Discuss a project', headerAction: 'Discuss a project',
+    workKicker: '01 / SELECTED WORK', workTitle: 'See the thinking in the interface.',
     workIntro: 'Approved projects will be shown with real interface screenshots and a clear account of the role, scope, and technology.',
     workEmptyTitle: 'Case studies are in preparation.',
     workEmptyBody: 'Project details and screenshots are being reviewed for publication. No unverified work is presented as a completed client project.',
@@ -50,13 +54,13 @@ export const copy: Record<Locale, Copy> = {
     demoRoleLabel: 'Example role', demoScopeLabel: 'Example scope', demoTechnologyLabel: 'Example technology',
     projectRoleLabel: 'Role', projectScopeLabel: 'Scope', projectTechnologyLabel: 'Technology',
     projectLiveLabel: 'View live site', projectRepositoryLabel: 'View source repository', projectImageLabel: 'Open full-size image',
-    servicesKicker: '02 / SERVICES', servicesTitle: 'Software for the way your business works.',
-    servicesIntro: 'These are the types of projects I can discuss and scope with a client. The right solution depends on the work it needs to support.',
+    servicesKicker: '02 / SERVICES', servicesTitle: 'The right tool for the work at hand.',
+    servicesIntro: 'A clear website and useful internal software solve different problems. Each engagement begins by defining what people need to do.',
     services: [
-      { category: 'corporate-website', description: 'Clear, responsive websites that explain a business and help visitors find the right next step.' },
-      { category: 'crm', description: 'Customer information and workflows organized around the people who use them.' },
-      { category: 'cms', description: 'Content tools that make publishing and maintaining a website more manageable.' },
-      { category: 'erp-business-management', description: 'Custom tools for connected business records, operations, and internal processes.' },
+      { category: 'corporate-website', description: 'Give visitors a clear picture of your business, your services, and the next step to take.' },
+      { category: 'crm', description: 'Bring customer context, follow-ups, and team actions into a workflow people can understand.' },
+      { category: 'cms', description: 'Make publishing and maintaining business content easier for the people responsible for it.' },
+      { category: 'erp-business-management', description: 'Connect operational records, requests, and approvals around how your business actually works.' },
     ],
     technologyKicker: '03 / TECHNOLOGY', technologyTitle: 'A practical technical foundation.',
     technologyIntro: 'These capabilities are demonstrated in this portfolio. Technology choices for client work will be described only in approved case studies.',
@@ -90,12 +94,14 @@ export const copy: Record<Locale, Copy> = {
       'corporate-website': 'เว็บไซต์องค์กร', crm: 'ระบบ CRM', cms: 'แพลตฟอร์ม CMS',
       'erp-business-management': 'ระบบ ERP / บริหารธุรกิจ',
     },
-    heroEyebrow: 'รับพัฒนาซอฟต์แวร์อิสระ',
-    heroTitle: 'เว็บไซต์และซอฟต์แวร์ธุรกิจที่สร้างเพื่อการใช้งานจริง',
-    heroDescription: 'ผมชื่อ Suthipong Toonritsa ทำงานร่วมกับลูกค้าเพื่อสร้างเครื่องมือดิจิทัลที่ชัดเจน ใช้งานได้จริง และเหมาะกับความต้องการของธุรกิจ',
-    heroCapabilitiesLabel: 'งานที่รับพัฒนา',
-    primaryAction: 'ดูผลงาน', secondaryAction: 'ติดต่อ',
-    workKicker: '01 / ผลงาน', workTitle: 'ผลงานพร้อมบริบทของงาน',
+    heroEyebrow: 'พัฒนาซอฟต์แวร์อิสระ',
+    heroTitleLead: 'เว็บไซต์องค์กร', heroTitleFocus: 'ซอฟต์แวร์ธุรกิจที่ตรงงาน',
+    heroDescription: 'ผมช่วยเปลี่ยนความต้องการของธุรกิจให้เป็นเว็บไซต์ที่ชัดเจนและหน้าจอซอฟต์แวร์ที่ใช้งานได้จริง ตั้งแต่เว็บสาธารณะไปจนถึงขั้นตอนการทำงานภายใน',
+    heroFootnote: 'เว็บไซต์องค์กร  /  CRM  /  CMS  /  ERP',
+    heroVisualWebsiteLabel: 'แนวคิดเว็บไซต์', heroVisualWebsiteTitle: 'ชัดเจนตั้งแต่แรกเห็น', heroVisualWebsiteAction: 'ดูบริการ',
+    heroVisualSystemLabel: 'ระบบธุรกิจ', heroVisualSystemTitle: 'ขั้นตอนงานที่เชื่อมต่อกัน', heroVisualSteps: ['รับเรื่อง', 'ตรวจสอบ', 'ส่งมอบ'], heroVisualEdgeLabel: 'เว็บไซต์ / ระบบ / ขั้นตอนงาน',
+    primaryAction: 'สำรวจผลงาน', secondaryAction: 'คุยเรื่องโครงการ', headerAction: 'คุยเรื่องโครงการ',
+    workKicker: '01 / ผลงาน', workTitle: 'เห็นแนวคิดผ่านหน้าจอ',
     workIntro: 'โครงการที่ได้รับอนุมัติจะแสดงภาพหน้าจอจริง พร้อมบทบาท ขอบเขตงาน และเทคโนโลยีที่ใช้',
     workEmptyTitle: 'กำลังเตรียมกรณีศึกษา',
     workEmptyBody: 'รายละเอียดโครงการและภาพหน้าจออยู่ระหว่างตรวจสอบก่อนเผยแพร่ จะไม่แสดงงานที่ยังไม่ยืนยันว่าเป็นโครงการลูกค้าที่เสร็จแล้ว',
@@ -108,13 +114,13 @@ export const copy: Record<Locale, Copy> = {
     demoRoleLabel: 'ตัวอย่างบทบาท', demoScopeLabel: 'ตัวอย่างขอบเขต', demoTechnologyLabel: 'ตัวอย่างเทคโนโลยี',
     projectRoleLabel: 'บทบาท', projectScopeLabel: 'ขอบเขตงาน', projectTechnologyLabel: 'เทคโนโลยี',
     projectLiveLabel: 'ดูเว็บไซต์', projectRepositoryLabel: 'ดูซอร์สโค้ด', projectImageLabel: 'เปิดภาพขนาดเต็ม',
-    servicesKicker: '02 / บริการ', servicesTitle: 'ซอฟต์แวร์ที่เหมาะกับรูปแบบการทำงานของธุรกิจ',
-    servicesIntro: 'ประเภทงานเหล่านี้สามารถพูดคุยและกำหนดขอบเขตร่วมกับลูกค้าได้ แนวทางที่เหมาะสมขึ้นอยู่กับงานที่ระบบต้องรองรับ',
+    servicesKicker: '02 / บริการ', servicesTitle: 'เลือกเครื่องมือให้ตรงกับงาน',
+    servicesIntro: 'เว็บไซต์ที่ชัดเจนกับซอฟต์แวร์ภายในแก้ปัญหาคนละแบบ ทุกโครงการเริ่มจากทำความเข้าใจว่าผู้ใช้ต้องทำอะไร',
     services: [
-      { category: 'corporate-website', description: 'เว็บไซต์ที่อ่านง่าย รองรับหลายขนาดหน้าจอ และช่วยให้ผู้เข้าชมพบข้อมูลหรือขั้นตอนถัดไป' },
-      { category: 'crm', description: 'จัดระเบียบข้อมูลลูกค้าและขั้นตอนการทำงานให้เหมาะกับผู้ใช้งานจริง' },
-      { category: 'cms', description: 'เครื่องมือจัดการเนื้อหาที่ช่วยให้ทีมเผยแพร่และดูแลเว็บไซต์ได้สะดวกขึ้น' },
-      { category: 'erp-business-management', description: 'เครื่องมือเฉพาะงานสำหรับข้อมูล การดำเนินงาน และกระบวนการภายในธุรกิจ' },
+      { category: 'corporate-website', description: 'ช่วยให้ผู้เข้าชมเข้าใจธุรกิจ บริการ และขั้นตอนถัดไปได้ชัดเจน' },
+      { category: 'crm', description: 'รวมบริบทลูกค้า งานติดตาม และสิ่งที่ทีมต้องทำไว้ในขั้นตอนที่เข้าใจง่าย' },
+      { category: 'cms', description: 'ช่วยให้ผู้รับผิดชอบเผยแพร่และดูแลเนื้อหาธุรกิจได้สะดวกขึ้น' },
+      { category: 'erp-business-management', description: 'เชื่อมข้อมูล คำขอ และการอนุมัติให้สอดคล้องกับการทำงานของธุรกิจ' },
     ],
     technologyKicker: '03 / เทคโนโลยี', technologyTitle: 'พื้นฐานทางเทคนิคที่เลือกใช้ตามงาน',
     technologyIntro: 'ความสามารถเหล่านี้มีตัวอย่างให้เห็นในพอร์ตโฟลิโอนี้ ส่วนเทคโนโลยีของโครงการลูกค้าจะระบุในกรณีศึกษาที่ได้รับอนุมัติเท่านั้น',
