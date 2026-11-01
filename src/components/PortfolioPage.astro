@@ -9,7 +9,10 @@ const { locale } = Astro.props;
 const t = copy[locale];
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const currentPath = locale === 'en' ? base : `${base}th/`;
-const selectedProjects = [...approvedProjects].sort((a, b) => Number(b.featured) - Number(a.featured));
+const preview = import.meta.env.PUBLIC_PORTFOLIO_PREVIEW === 'true';
+const selectedProjects = preview
+  ? (await import('../content/demo-projects')).demoProjects
+  : [...approvedProjects].sort((a, b) => Number(b.featured) - Number(a.featured));
 const categories = ['corporate-website', 'crm', 'cms', 'erp-business-management'] as const;
 ---
 <BaseLayout locale={locale}>
@@ -35,10 +38,11 @@ const categories = ['corporate-website', 'crm', 'cms', 'erp-business-management'
     <div class="container">
       <div class="section-heading">
         <div><p class="eyebrow">{t.workKicker}</p><h2 id="work-title">{t.workTitle}</h2></div>
-        <p>{t.workIntro}</p>
+        <p>{preview ? t.previewWorkIntro : t.workIntro}</p>
       </div>
+      {preview && <p class="demo-section-note">{t.previewWorkNotice}</p>}
       {selectedProjects.length > 0
-        ? <div class="project-list">{selectedProjects.map((project, index) => <ProjectShowcase project={project} locale={locale} priority={index === 0} />)}</div>
+        ? <div class="project-list">{selectedProjects.map((project, index) => <ProjectShowcase project={project} locale={locale} priority={index === 0} demo={preview} />)}</div>
         : <div class="work-empty"><span class="work-empty-line" aria-hidden="true"></span><div><h3>{t.workEmptyTitle}</h3><p>{t.workEmptyBody}</p></div></div>}
     </div>
   </section>

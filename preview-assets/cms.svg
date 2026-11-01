@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+  <title id="title">Commonplace CMS concept</title><desc id="desc">Original fictional content management editor artwork.</desc>
+  <rect width="1440" height="900" fill="#edece8"/><rect width="1440" height="68" fill="#202d35"/>
+  <text x="35" y="46" fill="#e7eee9" font-family="Georgia,serif" font-size="28">commonplace<span fill="#e4b582">.</span></text>
+  <text x="421" y="43" fill="#b8c7c8" font-family="Arial,sans-serif" font-size="16">Content</text><text x="545" y="43" fill="#b8c7c8" font-family="Arial,sans-serif" font-size="16">Media</text><text x="645" y="43" fill="#b8c7c8" font-family="Arial,sans-serif" font-size="16">Collections</text>
+  <rect x="1260" y="15" width="143" height="38" rx="6" fill="#c9835c"/><text x="1286" y="40" fill="#fff" font-family="Arial,sans-serif" font-size="16">Publish ↗</text>
+  <rect x="0" y="68" width="243" height="832" fill="#f8f8f4"/><path d="M243 68v832" stroke="#d6dcd8"/>
+  <text x="29" y="115" fill="#87918e" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">CONTENT LIBRARY</text>
+  <rect x="15" y="137" width="213" height="43" rx="6" fill="#e8eee8"/><text x="30" y="165" fill="#304b43" font-family="Arial,sans-serif" font-size="16">▤  All pages</text>
+  <g fill="#60746d" font-family="Arial,sans-serif" font-size="16"><text x="30" y="220">□  Articles</text><text x="30" y="266">▥  Landing pages</text><text x="30" y="312">▦  Media library</text><text x="30" y="358">⌕  Search content</text></g>
+  <path d="M28 401h187" stroke="#d8deda"/><text x="29" y="438" fill="#87918e" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">RECENT DRAFTS</text>
+  <g fill="#38534a" font-family="Arial,sans-serif" font-size="14"><text x="30" y="483">The spaces we make</text><text x="30" y="522">A note on materials</text><text x="30" y="561">Studio journal</text></g>
+  <text x="29" y="866" fill="#a76544" font-family="Arial,sans-serif" font-size="12" letter-spacing="1.5">FICTIONAL UI CONCEPT</text>
+  <rect x="243" y="68" width="1197" height="67" fill="#fff"/><text x="285" y="109" fill="#6d7e79" font-family="Arial,sans-serif" font-size="16">Pages  /  Studio journal  /  Edit</text><text x="1274" y="109" fill="#6d7e79" font-family="Arial,sans-serif" font-size="15">Saved just now</text>
+  <text x="285" y="193" fill="#263c36" font-family="Arial,sans-serif" font-size="36" font-weight="bold">Edit story</text><text x="286" y="225" fill="#82918c" font-family="Arial,sans-serif" font-size="16">Shape the content before it goes live.</text>
+  <rect x="285" y="259" width="796" height="589" rx="8" fill="#fff"/>
+  <text x="324" y="306" fill="#83918c" font-family="Arial,sans-serif" font-size="14" font-weight="bold" letter-spacing="1.5">STORY TITLE</text>
+  <text x="324" y="370" fill="#1d302a" font-family="Georgia,serif" font-size="45">The spaces we make</text><path d="M324 395h719" stroke="#e0e5e0"/>
+  <text x="324" y="442" fill="#80928a" font-family="Arial,sans-serif" font-size="14" font-weight="bold" letter-spacing="1.5">INTRODUCTION</text>
+  <text x="324" y="484" fill="#41564e" font-family="Georgia,serif" font-size="22">Good work begins with the questions we ask.</text>
+  <text x="324" y="521" fill="#63776f" font-family="Arial,sans-serif" font-size="17">This sample article shows how a small team might compose,</text><text x="324" y="548" fill="#63776f" font-family="Arial,sans-serif" font-size="17">review, and publish content in one considered workspace.</text>
+  <rect x="324" y="583" width="719" height="177" rx="5" fill="#d8dfd5"/><path d="M324 735l137-91 106 65 110-88 122 85 105-75 139 104Z" fill="#778f7e"/><circle cx="869" cy="626" r="37" fill="#e9d29f"/>
+  <text x="324" y="804" fill="#81918b" font-family="Arial,sans-serif" font-size="14">Add caption to your media…</text>
+  <rect x="1105" y="259" width="295" height="302" rx="8" fill="#fff"/><text x="1130" y="298" fill="#263c36" font-family="Arial,sans-serif" font-size="20" font-weight="bold">Publication</text><path d="M1130 316h245" stroke="#e1e7e2"/>
+  <g font-family="Arial,sans-serif" font-size="15"><text x="1130" y="353" fill="#82928b">Status</text><text x="1303" y="353" fill="#a76544">Draft</text><text x="1130" y="401" fill="#82928b">Visibility</text><text x="1292" y="401" fill="#41564e">Internal</text><text x="1130" y="449" fill="#82928b">Reviewer</text><text x="1288" y="449" fill="#41564e">Not set</text></g>
+  <rect x="1130" y="488" width="245" height="44" rx="6" fill="#294d42"/><text x="1206" y="516" fill="#fff" font-family="Arial,sans-serif" font-size="15">Preview story ↗</text>
+  <rect x="1105" y="581" width="295" height="267" rx="8" fill="#fff"/><text x="1130" y="620" fill="#263c36" font-family="Arial,sans-serif" font-size="20" font-weight="bold">Content details</text><path d="M1130 640h245" stroke="#e1e7e2"/><g font-family="Arial,sans-serif" font-size="15"><text x="1130" y="679" fill="#82928b">Collection</text><text x="1130" y="705" fill="#41564e">Studio journal</text><text x="1130" y="752" fill="#82928b">URL path</text><text x="1130" y="779" fill="#41564e">/journal/spaces</text></g>
+</svg>

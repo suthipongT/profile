@@ -12,8 +12,11 @@ type Copy = {
   heroEyebrow: string; heroTitle: string; heroDescription: string; heroCapabilitiesLabel: string;
   primaryAction: string; secondaryAction: string;
   workKicker: string; workTitle: string; workIntro: string; workEmptyTitle: string; workEmptyBody: string;
+  previewBanner: string; previewTitlePrefix: string; previewMetaDescription: string;
+  previewWorkIntro: string; previewWorkNotice: string; demoProjectLabel: string;
+  demoRoleLabel: string; demoScopeLabel: string; demoTechnologyLabel: string;
   projectRoleLabel: string; projectScopeLabel: string; projectTechnologyLabel: string;
-  projectLiveLabel: string; projectRepositoryLabel: string;
+  projectLiveLabel: string; projectRepositoryLabel: string; projectImageLabel: string;
   servicesKicker: string; servicesTitle: string; servicesIntro: string; services: Service[];
   technologyKicker: string; technologyTitle: string; technologyIntro: string; technologyGroups: TechnologyGroup[];
   processKicker: string; processTitle: string; processIntro: string; processSteps: Step[];
@@ -38,8 +41,15 @@ export const copy: Record<Locale, Copy> = {
     workIntro: 'Approved projects will be shown with real interface screenshots and a clear account of the role, scope, and technology.',
     workEmptyTitle: 'Case studies are in preparation.',
     workEmptyBody: 'Project details and screenshots are being reviewed for publication. No unverified work is presented as a completed client project.',
+    previewBanner: 'DESIGN PREVIEW · Fictional interface concepts only. No client work is shown.',
+    previewTitlePrefix: 'Design sample preview',
+    previewMetaDescription: 'Unpublished design preview with fictional corporate website, CRM, CMS, and ERP interface concepts. These are not client projects.',
+    previewWorkIntro: 'Four fictional interface concepts show how the project showcase could look once real, approved work is available.',
+    previewWorkNotice: 'SAMPLE WORK ONLY · These concepts, screens, roles, scopes, and technology lists are illustrative. They are not completed client projects.',
+    demoProjectLabel: 'DESIGN SAMPLE / FICTIONAL CONCEPT',
+    demoRoleLabel: 'Example role', demoScopeLabel: 'Example scope', demoTechnologyLabel: 'Example technology',
     projectRoleLabel: 'Role', projectScopeLabel: 'Scope', projectTechnologyLabel: 'Technology',
-    projectLiveLabel: 'View live site', projectRepositoryLabel: 'View source repository',
+    projectLiveLabel: 'View live site', projectRepositoryLabel: 'View source repository', projectImageLabel: 'Open full-size image',
     servicesKicker: '02 / SERVICES', servicesTitle: 'Software for the way your business works.',
     servicesIntro: 'These are the types of projects I can discuss and scope with a client. The right solution depends on the work it needs to support.',
     services: [
@@ -49,10 +59,11 @@ export const copy: Record<Locale, Copy> = {
       { category: 'erp-business-management', description: 'Custom tools for connected business records, operations, and internal processes.' },
     ],
     technologyKicker: '03 / TECHNOLOGY', technologyTitle: 'A practical technical foundation.',
-    technologyIntro: 'The verified tools below power this portfolio. Technologies used on client projects will be listed with each approved case study; backend and API choices depend on the project.',
+    technologyIntro: 'These capabilities are demonstrated in this portfolio. Technology choices for client work will be described only in approved case studies.',
     technologyGroups: [
-      { title: 'Web implementation', items: ['Astro', 'TypeScript', 'Tailwind CSS'] },
-      { title: 'Static delivery', items: ['Static HTML', 'GitHub Pages', 'pnpm'] },
+      { title: 'Interface engineering', items: ['Responsive layouts', 'Accessible navigation', 'English / Thai pages'] },
+      { title: 'Web stack', items: ['Astro', 'TypeScript', 'Tailwind CSS'] },
+      { title: 'Delivery & quality', items: ['Static Site Generation', 'SEO metadata', 'GitHub Pages', 'pnpm'] },
     ],
     processKicker: '04 / PROCESS', processTitle: 'A clear path from idea to delivery.',
     processIntro: 'A proposed four-step framework. Scope and working arrangements are agreed for each project.',
@@ -88,8 +99,15 @@ export const copy: Record<Locale, Copy> = {
     workIntro: 'โครงการที่ได้รับอนุมัติจะแสดงภาพหน้าจอจริง พร้อมบทบาท ขอบเขตงาน และเทคโนโลยีที่ใช้',
     workEmptyTitle: 'กำลังเตรียมกรณีศึกษา',
     workEmptyBody: 'รายละเอียดโครงการและภาพหน้าจออยู่ระหว่างตรวจสอบก่อนเผยแพร่ จะไม่แสดงงานที่ยังไม่ยืนยันว่าเป็นโครงการลูกค้าที่เสร็จแล้ว',
+    previewBanner: 'ตัวอย่างงานออกแบบ · เป็นแนวคิดหน้าจอสมมติเท่านั้น ไม่มีผลงานลูกค้าในหน้านี้',
+    previewTitlePrefix: 'ตัวอย่างงานออกแบบ',
+    previewMetaDescription: 'หน้าตัวอย่างงานออกแบบที่ยังไม่เผยแพร่ แสดงแนวคิดหน้าจอเว็บไซต์องค์กร CRM, CMS และ ERP ซึ่งไม่ใช่โครงการลูกค้า',
+    previewWorkIntro: 'แนวคิดหน้าจอสมมติสี่แบบแสดงรูปแบบการนำเสนอผลงาน ก่อนเพิ่มโครงการจริงที่ได้รับอนุมัติ',
+    previewWorkNotice: 'ตัวอย่างสมมติเท่านั้น · แนวคิด หน้าจอ บทบาท ขอบเขต และเทคโนโลยีเป็นเพียงตัวอย่าง ไม่ใช่โครงการลูกค้าที่เสร็จแล้ว',
+    demoProjectLabel: 'ตัวอย่างงานออกแบบ / แนวคิดสมมติ',
+    demoRoleLabel: 'ตัวอย่างบทบาท', demoScopeLabel: 'ตัวอย่างขอบเขต', demoTechnologyLabel: 'ตัวอย่างเทคโนโลยี',
     projectRoleLabel: 'บทบาท', projectScopeLabel: 'ขอบเขตงาน', projectTechnologyLabel: 'เทคโนโลยี',
-    projectLiveLabel: 'ดูเว็บไซต์', projectRepositoryLabel: 'ดูซอร์สโค้ด',
+    projectLiveLabel: 'ดูเว็บไซต์', projectRepositoryLabel: 'ดูซอร์สโค้ด', projectImageLabel: 'เปิดภาพขนาดเต็ม',
     servicesKicker: '02 / บริการ', servicesTitle: 'ซอฟต์แวร์ที่เหมาะกับรูปแบบการทำงานของธุรกิจ',
     servicesIntro: 'ประเภทงานเหล่านี้สามารถพูดคุยและกำหนดขอบเขตร่วมกับลูกค้าได้ แนวทางที่เหมาะสมขึ้นอยู่กับงานที่ระบบต้องรองรับ',
     services: [
@@ -99,10 +117,11 @@ export const copy: Record<Locale, Copy> = {
       { category: 'erp-business-management', description: 'เครื่องมือเฉพาะงานสำหรับข้อมูล การดำเนินงาน และกระบวนการภายในธุรกิจ' },
     ],
     technologyKicker: '03 / เทคโนโลยี', technologyTitle: 'พื้นฐานทางเทคนิคที่เลือกใช้ตามงาน',
-    technologyIntro: 'เครื่องมือที่ยืนยันได้ด้านล่างใช้สร้างพอร์ตโฟลิโอนี้ เทคโนโลยีของโครงการลูกค้าจะระบุพร้อมกรณีศึกษาที่ได้รับอนุมัติ ส่วน backend และ API จะเลือกตามความต้องการของงาน',
+    technologyIntro: 'ความสามารถเหล่านี้มีตัวอย่างให้เห็นในพอร์ตโฟลิโอนี้ ส่วนเทคโนโลยีของโครงการลูกค้าจะระบุในกรณีศึกษาที่ได้รับอนุมัติเท่านั้น',
     technologyGroups: [
-      { title: 'การพัฒนาเว็บ', items: ['Astro', 'TypeScript', 'Tailwind CSS'] },
-      { title: 'การเผยแพร่เว็บไซต์สแตติก', items: ['Static HTML', 'GitHub Pages', 'pnpm'] },
+      { title: 'การพัฒนาส่วนติดต่อ', items: ['เลย์เอาต์รองรับหลายหน้าจอ', 'เมนูที่เข้าถึงได้', 'หน้าเว็บภาษาอังกฤษ / ไทย'] },
+      { title: 'เทคโนโลยีเว็บ', items: ['Astro', 'TypeScript', 'Tailwind CSS'] },
+      { title: 'การส่งมอบและคุณภาพ', items: ['Static Site Generation', 'ข้อมูล SEO', 'GitHub Pages', 'pnpm'] },
     ],
     processKicker: '04 / ขั้นตอน', processTitle: 'แนวทางทำงานที่ชัดเจนตั้งแต่ต้นจนส่งมอบ',
     processIntro: 'กรอบการทำงานเบื้องต้นสี่ขั้นตอน โดยตกลงขอบเขตและรูปแบบการทำงานสำหรับแต่ละโครงการ',

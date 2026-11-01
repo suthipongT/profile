@@ -30,13 +30,27 @@ pnpm build
 pnpm verify
 ```
 
-The static output is `dist/`. English is at `/profile/`; Thai is at `/profile/th/`. `astro.config.mjs` sets `site`, `base`, and static output. The sitemap integration creates `sitemap-index.xml`, referenced from `public/robots.txt`.
+The static output is `dist/`. English is at `/profile/`; Thai is at `/profile/th/`. `astro.config.mjs` sets `site`, `base`, and static output. The sitemap integration creates `sitemap-index.xml` for production; the generated `robots.txt` references it.
 
 ## Content status
 
 The homepage presents services for corporate websites, CRM systems, CMS platforms, and ERP / business management systems. Its sections are Hero, Selected Work, Services, Technology, Process, About, and Contact. Service categories describe work available for discussion; they are not evidence of completed client projects.
 
 English and Thai copy lives in `src/content/site.ts`. Typed project records live in `src/content/projects.ts`. Only records with `status: 'approved'` render. The list is currently empty, so both languages show a short empty state instead of fabricated case studies. A future project record can have multiple imported local screenshots with bilingual alt text and captions, or no screenshots; live and repository URLs are optional. Put approved images under `src/assets/projects/` for Astro image optimization. Verify project facts, image rights, and screenshot privacy before adding any record.
+
+## Fictional design preview
+
+Four original SVG interface concepts live under `preview-assets/`, with isolated records in `src/content/demo-projects.ts`. They are fictional design samples, not client work. The preview build copies the artwork into `dist/demo/`; the normal build does not emit any demo artwork or render the records. Preview pages show visible English/Thai sample labels and carry `noindex, nofollow, noarchive`; preview `robots.txt` disallows crawling and no sitemap is generated.
+
+For a local preview build, provide the actual preview origin and optional base path:
+
+```sh
+ASTRO_TELEMETRY_DISABLED=1 PUBLIC_PORTFOLIO_PREVIEW=true PUBLIC_PORTFOLIO_PREVIEW_SITE=http://127.0.0.1:4321 pnpm build
+ASTRO_TELEMETRY_DISABLED=1 PUBLIC_PORTFOLIO_PREVIEW=true PUBLIC_PORTFOLIO_PREVIEW_SITE=http://127.0.0.1:4321 pnpm verify
+pnpm preview --host 127.0.0.1
+```
+
+Before any future hosted preview, set `PUBLIC_PORTFOLIO_PREVIEW_SITE` to that host's origin and `PUBLIC_PORTFOLIO_PREVIEW_BASE` to its repository path if different from `/profile`. A preview build fails without a host origin and refuses the production `/profile/` canonical URL. The preview flag is opt-in and does not override approval status for real projects. Rebuild without the flag for production output; never reuse a preview `dist/` directory as a production artifact.
 
 Both language routes render HTML at build time. The only contact link is the repository owner's verified public GitHub profile. The mobile menu uses a small script to close after an anchor is selected. No previous template images or bundled scripts are used.
 

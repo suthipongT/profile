@@ -18,6 +18,8 @@ export type Project = {
   liveUrl?: string;
   repositoryUrl?: string;
 };
+export type DemoProject = Omit<Project, 'status'> & { kind: 'demo' };
+export type ShowcaseProject = Project | DemoProject;
 
 // Add only verified projects with publication approval. Local screenshots belong in src/assets/projects/.
 export const projects: readonly Project[] = [];

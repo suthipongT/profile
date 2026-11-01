@@ -21,6 +21,7 @@ h1, h2, h3 { overflow-wrap: break-word; }
 .container { width: min(100% - 2rem, 1180px); margin-inline: auto; }
 .skip-link { position: fixed; z-index: 100; top: .75rem; left: .75rem; transform: translateY(-160%); padding: .75rem 1rem; border-radius: .25rem; background: #75d7d2; color: #07121c; font-weight: 700; }
 .skip-link:focus { transform: translateY(0); }
+.preview-banner { padding: .65rem 1rem; background: #f0c286; color: #17242c; text-align: center; font-size: .77rem; font-weight: 800; line-height: 1.5; letter-spacing: .025em; }
 
 .site-header { position: relative; z-index: 30; border-bottom: 1px solid #203641; background: #07121c; }
 .header-inner { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
@@ -75,14 +76,17 @@ h1, h2, h3 { overflow-wrap: break-word; }
 .work-empty-line { width: 32px; height: 2px; background: #75d7d2; }
 .work-empty h3 { margin-bottom: .7rem; font-size: clamp(1.35rem, 3vw, 1.8rem); font-weight: 600; letter-spacing: -.03em; }
 .work-empty p { max-width: 690px; margin-bottom: 0; color: #a7bdc5; line-height: 1.75; }
+.demo-section-note { max-width: 870px; margin: 0 0 2.5rem; padding: .85rem 1rem; border-left: 3px solid #f0c286; background: #142832; color: #f2d6ac; font-size: .86rem; line-height: 1.65; }
 
 .project-list { display: grid; gap: 5rem; }
 .project-showcase { display: grid; gap: 1.8rem; padding-top: 2rem; border-top: 1px solid #42606b; }
 .project-media figure { margin: 0; }
 .project-media img { display: block; width: 100%; height: auto; border: 1px solid #36515d; background: #102430; }
-.project-media figcaption { margin-top: .6rem; color: #94adb7; font-size: .8rem; line-height: 1.5; }
+.project-media figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem 1rem; margin-top: .6rem; color: #94adb7; font-size: .8rem; line-height: 1.5; }
+.project-media figcaption a { color: #75d7d2; text-decoration: underline; text-underline-offset: .2rem; }
 .project-supporting { display: grid; gap: 1rem; margin-top: 1rem; }
 .project-category { margin-bottom: 1rem; }
+.demo-project-label { display: inline-block; margin-bottom: .8rem; padding: .35rem .55rem; border: 1px solid #b58b5c; color: #f0c286; font-size: .66rem; font-weight: 800; letter-spacing: .08em; line-height: 1.45; }
 .project-copy h3 { margin-bottom: 1rem; font-size: clamp(1.7rem, 4vw, 2.7rem); font-weight: 620; letter-spacing: -.045em; line-height: 1.15; }
 .project-summary { margin-bottom: .7rem; color: #e0ecee; font-size: 1.05rem; line-height: 1.6; }
 .project-description { color: #a7bdc5; line-height: 1.75; }
