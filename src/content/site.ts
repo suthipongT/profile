@@ -1,142 +1,126 @@
+import type { ProjectCategory } from './projects';
+
 export type Locale = 'en' | 'th';
 
-type Card = { number: string; title: string; description: string; detail: string };
+type Service = { category: ProjectCategory; description: string };
+type Step = { title: string; description: string };
+type TechnologyGroup = { title: string; items: string[] };
+
 type Copy = {
-  langLabel: string;
-  nav: { about: string; expertise: string; stack: string; projects: string; experience: string; contact: string };
-  eyebrow: string;
-  heroTitle: string;
-  heroDescription: string;
-  heroNote: string;
-  primaryAction: string;
-  secondaryAction: string;
-  availability: string;
-  aboutKicker: string;
-  aboutTitle: string;
-  aboutBody: string;
-  aboutAside: string;
-  expertiseKicker: string;
-  expertiseTitle: string;
-  expertiseIntro: string;
-  expertise: Card[];
-  stackKicker: string;
-  stackTitle: string;
-  stackBody: string;
-  stackGroups: { label: string; items: string[] }[];
-  projectsKicker: string;
-  projectsTitle: string;
-  projectsIntro: string;
-  projectCards: Card[];
-  experienceKicker: string;
-  experienceTitle: string;
-  experienceBody: string;
-  experienceItems: string[];
-  contactKicker: string;
-  contactTitle: string;
-  contactBody: string;
-  contactAction: string;
-  footer: string;
-  mobileMenu: string;
-  metaDescription: string;
+  nav: { work: string; services: string; technology: string; process: string; about: string; contact: string };
+  categoryLabels: Record<ProjectCategory, string>;
+  heroEyebrow: string; heroTitle: string; heroDescription: string; heroCapabilitiesLabel: string;
+  primaryAction: string; secondaryAction: string;
+  workKicker: string; workTitle: string; workIntro: string; workEmptyTitle: string; workEmptyBody: string;
+  projectRoleLabel: string; projectScopeLabel: string; projectTechnologyLabel: string;
+  projectLiveLabel: string; projectRepositoryLabel: string;
+  servicesKicker: string; servicesTitle: string; servicesIntro: string; services: Service[];
+  technologyKicker: string; technologyTitle: string; technologyIntro: string; technologyGroups: TechnologyGroup[];
+  processKicker: string; processTitle: string; processIntro: string; processSteps: Step[];
+  aboutKicker: string; aboutTitle: string; aboutBody: string; aboutNote: string;
+  contactKicker: string; contactTitle: string; contactBody: string; contactAction: string;
+  footer: string; mobileMenu: string; metaTitle: string; metaDescription: string;
 };
 
 export const copy: Record<Locale, Copy> = {
   en: {
-    langLabel: 'English',
-    nav: { about: 'About', expertise: 'Expertise', stack: 'Tech stack', projects: 'Projects', experience: 'Experience', contact: 'Contact' },
-    eyebrow: 'SOFTWARE DEVELOPER · PORTFOLIO',
-    heroTitle: 'Thoughtful software, built for the real world.',
-    heroDescription: 'I’m Suthipong Toonritsa, a web developer. This portfolio is being rebuilt to present verified work, technical decisions, and the people they serve.',
-    heroNote: 'Portfolio content is in review. Project and career details below are clearly marked drafts.',
-    primaryAction: 'Explore the work',
-    secondaryAction: 'Get in touch',
-    availability: 'Open to meaningful conversations',
-    aboutKicker: '01 / ABOUT',
-    aboutTitle: 'A clear view of how I work.',
-    aboutBody: 'I build for clarity, maintainability, and an experience that feels considered at every screen size. The details of my background are being verified before publication.',
-    aboutAside: 'This site itself is a static Astro project with TypeScript, Tailwind CSS, bilingual routes, and a GitHub Pages friendly build.',
-    expertiseKicker: '02 / FOCUS AREAS',
-    expertiseTitle: 'The engineering principles behind the work.',
-    expertiseIntro: 'These are the focus areas for this portfolio. Personal case studies will be added only after their details are verified.',
-    expertise: [
-      { number: '01', title: 'Interface engineering', description: 'Semantic structure, responsive layouts, and accessible interaction patterns.', detail: 'Focus area · project evidence pending' },
-      { number: '02', title: 'Performance-minded delivery', description: 'Static rendering, efficient assets, and a small browser-side footprint.', detail: 'Focus area · project evidence pending' },
-      { number: '03', title: 'Maintainable systems', description: 'Typed content, reusable components, and predictable build and release paths.', detail: 'Focus area · project evidence pending' },
+    nav: { work: 'Selected work', services: 'Services', technology: 'Technology', process: 'Process', about: 'About', contact: 'Contact' },
+    categoryLabels: {
+      'corporate-website': 'Corporate websites', crm: 'CRM systems', cms: 'CMS platforms',
+      'erp-business-management': 'ERP / business management',
+    },
+    heroEyebrow: 'INDEPENDENT SOFTWARE DEVELOPMENT',
+    heroTitle: 'Websites and business software, built with purpose.',
+    heroDescription: 'I’m Suthipong Toonritsa. I work with clients on clear, usable digital tools shaped around their business needs.',
+    heroCapabilitiesLabel: 'What I can build',
+    primaryAction: 'View selected work', secondaryAction: 'Contact',
+    workKicker: '01 / SELECTED WORK', workTitle: 'The work, in context.',
+    workIntro: 'Approved projects will be shown with real interface screenshots and a clear account of the role, scope, and technology.',
+    workEmptyTitle: 'Case studies are in preparation.',
+    workEmptyBody: 'Project details and screenshots are being reviewed for publication. No unverified work is presented as a completed client project.',
+    projectRoleLabel: 'Role', projectScopeLabel: 'Scope', projectTechnologyLabel: 'Technology',
+    projectLiveLabel: 'View live site', projectRepositoryLabel: 'View source repository',
+    servicesKicker: '02 / SERVICES', servicesTitle: 'Software for the way your business works.',
+    servicesIntro: 'These are the types of projects I can discuss and scope with a client. The right solution depends on the work it needs to support.',
+    services: [
+      { category: 'corporate-website', description: 'Clear, responsive websites that explain a business and help visitors find the right next step.' },
+      { category: 'crm', description: 'Customer information and workflows organized around the people who use them.' },
+      { category: 'cms', description: 'Content tools that make publishing and maintaining a website more manageable.' },
+      { category: 'erp-business-management', description: 'Custom tools for connected business records, operations, and internal processes.' },
     ],
-    stackKicker: '03 / TECH STACK',
-    stackTitle: 'Tools with a purpose.',
-    stackBody: 'The site implementation uses the tools below. A separate, verified personal skills list will replace this foundation note later.',
-    stackGroups: [
-      { label: 'Site foundation', items: ['Astro', 'TypeScript', 'Tailwind CSS'] },
-      { label: 'Delivery', items: ['Static HTML', 'GitHub Pages', 'pnpm'] },
+    technologyKicker: '03 / TECHNOLOGY', technologyTitle: 'A practical technical foundation.',
+    technologyIntro: 'The verified tools below power this portfolio. Technologies used on client projects will be listed with each approved case study; backend and API choices depend on the project.',
+    technologyGroups: [
+      { title: 'Web implementation', items: ['Astro', 'TypeScript', 'Tailwind CSS'] },
+      { title: 'Static delivery', items: ['Static HTML', 'GitHub Pages', 'pnpm'] },
     ],
-    projectsKicker: '04 / FEATURED PROJECTS',
-    projectsTitle: 'Selected work, in preparation.',
-    projectsIntro: 'No project is presented as completed work until its ownership, scope, and results are confirmed. These slots show the information each case study will include.',
-    projectCards: [
-      { number: '01 / DRAFT', title: 'Project case study', description: 'Problem, audience, and the reason the project exists.', detail: 'Project identity and link pending verification' },
-      { number: '02 / DRAFT', title: 'Technical approach', description: 'Architecture, tools, tradeoffs, and individual contribution.', detail: 'Implementation details pending verification' },
-      { number: '03 / DRAFT', title: 'Outcome & learning', description: 'Evidence of impact, constraints, and what changed after release.', detail: 'Results pending verification' },
+    processKicker: '04 / PROCESS', processTitle: 'A clear path from idea to delivery.',
+    processIntro: 'A proposed four-step framework. Scope and working arrangements are agreed for each project.',
+    processSteps: [
+      { title: 'Discovery', description: 'Understand the business need, users, and current workflow.' },
+      { title: 'Solution planning', description: 'Define the scope, technical approach, and priorities together.' },
+      { title: 'Development & review', description: 'Build in reviewable stages and refine against the agreed requirements.' },
+      { title: 'Launch & handover', description: 'Prepare the agreed release and hand over the information needed to use it.' },
     ],
-    experienceKicker: '05 / EXPERIENCE',
-    experienceTitle: 'Experience, with the facts first.',
-    experienceBody: 'A verified career timeline is being prepared. The previous site contained template employment and education entries, so they are intentionally excluded here.',
-    experienceItems: ['Role and organization', 'Dates and responsibilities', 'Technologies and outcomes'],
-    contactKicker: '06 / CONTACT',
-    contactTitle: 'Let’s start a conversation.',
-    contactBody: 'For now, the verified public GitHub profile is the contact route. A preferred professional contact method can be added after approval.',
+    aboutKicker: '05 / ABOUT', aboutTitle: 'A developer focused on useful software.',
+    aboutBody: 'I’m Suthipong Toonritsa, an independent software developer. I value clear requirements, maintainable implementation, and interfaces that make sense to the people using them.',
+    aboutNote: 'Specific project work and outcomes will be published only after their details are verified.',
+    contactKicker: '06 / CONTACT', contactTitle: 'Have a project in mind?',
+    contactBody: 'The public GitHub profile is the currently verified way to reach me. A dedicated client inquiry channel can be added after approval.',
     contactAction: 'View GitHub profile',
-    footer: 'Built with care. Content under review.',
+    footer: 'Independent software development · Project content under review',
     mobileMenu: 'Navigation menu',
-    metaDescription: 'Suthipong Toonritsa’s software developer portfolio. Explore a modern, bilingual site built with Astro, TypeScript, and Tailwind CSS.',
+    metaTitle: 'Suthipong Toonritsa | Business Websites & Software Development',
+    metaDescription: 'Independent software development for corporate websites, CRM, CMS, and ERP or business management systems. Explore services and approved work.',
   },
   th: {
-    langLabel: 'ไทย',
-    nav: { about: 'เกี่ยวกับ', expertise: 'แนวทาง', stack: 'เทคโนโลยี', projects: 'ผลงาน', experience: 'ประสบการณ์', contact: 'ติดต่อ' },
-    eyebrow: 'นักพัฒนาซอฟต์แวร์ · พอร์ตโฟลิโอ',
-    heroTitle: 'ซอฟต์แวร์ที่ใส่ใจรายละเอียด เพื่อการใช้งานจริง',
-    heroDescription: 'ผมชื่อ Suthipong Toonritsa เป็นนักพัฒนาเว็บ พอร์ตโฟลิโอนี้กำลังจัดทำใหม่เพื่อแสดงผลงานที่ตรวจสอบได้ การตัดสินใจด้านเทคนิค และผู้ใช้งานที่ได้รับประโยชน์',
-    heroNote: 'เนื้อหาพอร์ตโฟลิโออยู่ระหว่างตรวจสอบ รายละเอียดโครงการและประสบการณ์ด้านล่างระบุชัดเจนว่าเป็นฉบับร่าง',
-    primaryAction: 'ดูผลงาน',
-    secondaryAction: 'ติดต่อ',
-    availability: 'ยินดีพูดคุยเกี่ยวกับโอกาสที่น่าสนใจ',
-    aboutKicker: '01 / เกี่ยวกับ',
-    aboutTitle: 'แนวทางการทำงานที่ชัดเจน',
-    aboutBody: 'ผมให้ความสำคัญกับความชัดเจน การดูแลรักษาโค้ด และประสบการณ์ใช้งานบนทุกขนาดหน้าจอ รายละเอียดประวัติส่วนตัวกำลังตรวจสอบก่อนเผยแพร่',
-    aboutAside: 'เว็บไซต์นี้สร้างแบบสแตติกด้วย Astro, TypeScript และ Tailwind CSS มีหน้าแยกภาษา และรองรับ GitHub Pages',
-    expertiseKicker: '02 / แนวทาง',
-    expertiseTitle: 'หลักคิดเบื้องหลังงานวิศวกรรม',
-    expertiseIntro: 'หัวข้อเหล่านี้เป็นแนวทางของพอร์ตโฟลิโอ กรณีศึกษาจริงจะเพิ่มหลังตรวจสอบข้อมูลแล้วเท่านั้น',
-    expertise: [
-      { number: '01', title: 'การพัฒนาส่วนติดต่อ', description: 'โครงสร้าง HTML ที่มีความหมาย เลย์เอาต์ยืดหยุ่น และรูปแบบการโต้ตอบที่เข้าถึงได้', detail: 'หัวข้อที่สนใจ · รอตรวจสอบหลักฐานผลงาน' },
-      { number: '02', title: 'ประสิทธิภาพในการส่งมอบ', description: 'การสร้างหน้าแบบสแตติก การจัดการไฟล์อย่างเหมาะสม และลด JavaScript บนเบราว์เซอร์', detail: 'หัวข้อที่สนใจ · รอตรวจสอบหลักฐานผลงาน' },
-      { number: '03', title: 'ระบบที่ดูแลต่อได้', description: 'ข้อมูลที่กำหนดชนิดชัดเจน คอมโพเนนต์ใช้ซ้ำ และขั้นตอน build กับ release ที่คาดเดาได้', detail: 'หัวข้อที่สนใจ · รอตรวจสอบหลักฐานผลงาน' },
+    nav: { work: 'ผลงาน', services: 'บริการ', technology: 'เทคโนโลยี', process: 'ขั้นตอน', about: 'เกี่ยวกับ', contact: 'ติดต่อ' },
+    categoryLabels: {
+      'corporate-website': 'เว็บไซต์องค์กร', crm: 'ระบบ CRM', cms: 'แพลตฟอร์ม CMS',
+      'erp-business-management': 'ระบบ ERP / บริหารธุรกิจ',
+    },
+    heroEyebrow: 'รับพัฒนาซอฟต์แวร์อิสระ',
+    heroTitle: 'เว็บไซต์และซอฟต์แวร์ธุรกิจที่สร้างเพื่อการใช้งานจริง',
+    heroDescription: 'ผมชื่อ Suthipong Toonritsa ทำงานร่วมกับลูกค้าเพื่อสร้างเครื่องมือดิจิทัลที่ชัดเจน ใช้งานได้จริง และเหมาะกับความต้องการของธุรกิจ',
+    heroCapabilitiesLabel: 'งานที่รับพัฒนา',
+    primaryAction: 'ดูผลงาน', secondaryAction: 'ติดต่อ',
+    workKicker: '01 / ผลงาน', workTitle: 'ผลงานพร้อมบริบทของงาน',
+    workIntro: 'โครงการที่ได้รับอนุมัติจะแสดงภาพหน้าจอจริง พร้อมบทบาท ขอบเขตงาน และเทคโนโลยีที่ใช้',
+    workEmptyTitle: 'กำลังเตรียมกรณีศึกษา',
+    workEmptyBody: 'รายละเอียดโครงการและภาพหน้าจออยู่ระหว่างตรวจสอบก่อนเผยแพร่ จะไม่แสดงงานที่ยังไม่ยืนยันว่าเป็นโครงการลูกค้าที่เสร็จแล้ว',
+    projectRoleLabel: 'บทบาท', projectScopeLabel: 'ขอบเขตงาน', projectTechnologyLabel: 'เทคโนโลยี',
+    projectLiveLabel: 'ดูเว็บไซต์', projectRepositoryLabel: 'ดูซอร์สโค้ด',
+    servicesKicker: '02 / บริการ', servicesTitle: 'ซอฟต์แวร์ที่เหมาะกับรูปแบบการทำงานของธุรกิจ',
+    servicesIntro: 'ประเภทงานเหล่านี้สามารถพูดคุยและกำหนดขอบเขตร่วมกับลูกค้าได้ แนวทางที่เหมาะสมขึ้นอยู่กับงานที่ระบบต้องรองรับ',
+    services: [
+      { category: 'corporate-website', description: 'เว็บไซต์ที่อ่านง่าย รองรับหลายขนาดหน้าจอ และช่วยให้ผู้เข้าชมพบข้อมูลหรือขั้นตอนถัดไป' },
+      { category: 'crm', description: 'จัดระเบียบข้อมูลลูกค้าและขั้นตอนการทำงานให้เหมาะกับผู้ใช้งานจริง' },
+      { category: 'cms', description: 'เครื่องมือจัดการเนื้อหาที่ช่วยให้ทีมเผยแพร่และดูแลเว็บไซต์ได้สะดวกขึ้น' },
+      { category: 'erp-business-management', description: 'เครื่องมือเฉพาะงานสำหรับข้อมูล การดำเนินงาน และกระบวนการภายในธุรกิจ' },
     ],
-    stackKicker: '03 / เทคโนโลยี',
-    stackTitle: 'เลือกเครื่องมือให้เหมาะกับงาน',
-    stackBody: 'เครื่องมือด้านล่างใช้สร้างเว็บไซต์นี้ รายการทักษะส่วนบุคคลที่ตรวจสอบแล้วจะเพิ่มภายหลัง',
-    stackGroups: [
-      { label: 'พื้นฐานเว็บไซต์', items: ['Astro', 'TypeScript', 'Tailwind CSS'] },
-      { label: 'การส่งมอบ', items: ['Static HTML', 'GitHub Pages', 'pnpm'] },
+    technologyKicker: '03 / เทคโนโลยี', technologyTitle: 'พื้นฐานทางเทคนิคที่เลือกใช้ตามงาน',
+    technologyIntro: 'เครื่องมือที่ยืนยันได้ด้านล่างใช้สร้างพอร์ตโฟลิโอนี้ เทคโนโลยีของโครงการลูกค้าจะระบุพร้อมกรณีศึกษาที่ได้รับอนุมัติ ส่วน backend และ API จะเลือกตามความต้องการของงาน',
+    technologyGroups: [
+      { title: 'การพัฒนาเว็บ', items: ['Astro', 'TypeScript', 'Tailwind CSS'] },
+      { title: 'การเผยแพร่เว็บไซต์สแตติก', items: ['Static HTML', 'GitHub Pages', 'pnpm'] },
     ],
-    projectsKicker: '04 / ผลงานเด่น',
-    projectsTitle: 'กำลังเตรียมข้อมูลผลงาน',
-    projectsIntro: 'จะไม่แสดงโครงการว่าเป็นผลงานจริงก่อนยืนยันเจ้าของ ขอบเขต และผลลัพธ์ ส่วนนี้แสดงข้อมูลที่แต่ละกรณีศึกษาจะต้องมี',
-    projectCards: [
-      { number: '01 / ฉบับร่าง', title: 'กรณีศึกษาโครงการ', description: 'ปัญหา กลุ่มผู้ใช้ และเหตุผลที่สร้างโครงการ', detail: 'รอยืนยันชื่อโครงการและลิงก์' },
-      { number: '02 / ฉบับร่าง', title: 'แนวทางด้านเทคนิค', description: 'สถาปัตยกรรม เครื่องมือ ข้อแลกเปลี่ยน และหน้าที่ที่รับผิดชอบ', detail: 'รอยืนยันรายละเอียดการพัฒนา' },
-      { number: '03 / ฉบับร่าง', title: 'ผลลัพธ์และบทเรียน', description: 'หลักฐานผลกระทบ ข้อจำกัด และสิ่งที่เปลี่ยนหลังเผยแพร่', detail: 'รอยืนยันผลลัพธ์' },
+    processKicker: '04 / ขั้นตอน', processTitle: 'แนวทางทำงานที่ชัดเจนตั้งแต่ต้นจนส่งมอบ',
+    processIntro: 'กรอบการทำงานเบื้องต้นสี่ขั้นตอน โดยตกลงขอบเขตและรูปแบบการทำงานสำหรับแต่ละโครงการ',
+    processSteps: [
+      { title: 'ทำความเข้าใจงาน', description: 'พูดคุยเรื่องความต้องการ ผู้ใช้งาน และขั้นตอนการทำงานปัจจุบัน' },
+      { title: 'วางแผนแนวทาง', description: 'กำหนดขอบเขต แนวทางทางเทคนิค และลำดับความสำคัญร่วมกัน' },
+      { title: 'พัฒนาและทบทวน', description: 'พัฒนาเป็นช่วงที่ตรวจสอบได้ และปรับตามความต้องการที่ตกลงกัน' },
+      { title: 'เผยแพร่และส่งมอบ', description: 'เตรียมเผยแพร่ตามที่ตกลง และส่งต่อข้อมูลที่จำเป็นต่อการใช้งาน' },
     ],
-    experienceKicker: '05 / ประสบการณ์',
-    experienceTitle: 'ประสบการณ์ที่อ้างอิงข้อเท็จจริง',
-    experienceBody: 'กำลังจัดทำลำดับประสบการณ์ที่ตรวจสอบได้ เว็บไซต์เดิมมีข้อมูลการทำงานและการศึกษาจากเทมเพลต จึงไม่ได้นำมาแสดงที่นี่',
-    experienceItems: ['ตำแหน่งและองค์กร', 'ช่วงเวลาและหน้าที่', 'เทคโนโลยีและผลลัพธ์'],
-    contactKicker: '06 / ติดต่อ',
-    contactTitle: 'เริ่มพูดคุยกัน',
-    contactBody: 'ขณะนี้ใช้โปรไฟล์ GitHub สาธารณะที่ยืนยันได้เป็นช่องทางติดต่อ สามารถเพิ่มช่องทางติดต่อสำหรับงานหลังได้รับการอนุมัติ',
+    aboutKicker: '05 / เกี่ยวกับ', aboutTitle: 'นักพัฒนาที่ให้ความสำคัญกับซอฟต์แวร์ที่ใช้งานได้จริง',
+    aboutBody: 'ผมชื่อ Suthipong Toonritsa เป็นนักพัฒนาซอฟต์แวร์อิสระ ให้ความสำคัญกับความต้องการที่ชัดเจน โค้ดที่ดูแลต่อได้ และหน้าจอที่เข้าใจง่ายสำหรับผู้ใช้งาน',
+    aboutNote: 'รายละเอียดผลงานและผลลัพธ์จะเผยแพร่หลังตรวจสอบข้อเท็จจริงแล้วเท่านั้น',
+    contactKicker: '06 / ติดต่อ', contactTitle: 'มีโครงการที่อยากพูดคุยไหม',
+    contactBody: 'ขณะนี้โปรไฟล์ GitHub สาธารณะเป็นช่องทางติดต่อที่ยืนยันได้ สามารถเพิ่มช่องทางสำหรับลูกค้าโดยเฉพาะหลังได้รับอนุมัติ',
     contactAction: 'ดูโปรไฟล์ GitHub',
-    footer: 'สร้างด้วยความใส่ใจ · เนื้อหาอยู่ระหว่างตรวจสอบ',
+    footer: 'พัฒนาซอฟต์แวร์อิสระ · เนื้อหาผลงานอยู่ระหว่างตรวจสอบ',
     mobileMenu: 'เมนูนำทาง',
-    metaDescription: 'พอร์ตโฟลิโอนักพัฒนาซอฟต์แวร์ของ Suthipong Toonritsa เว็บไซต์สองภาษาที่สร้างด้วย Astro, TypeScript และ Tailwind CSS',
+    metaTitle: 'Suthipong Toonritsa | เว็บไซต์ธุรกิจและพัฒนาซอฟต์แวร์',
+    metaDescription: 'บริการพัฒนาซอฟต์แวร์อิสระสำหรับเว็บไซต์องค์กร ระบบ CRM, CMS และ ERP หรือระบบบริหารธุรกิจ ดูบริการและผลงานที่ได้รับอนุมัติ',
   },
 };

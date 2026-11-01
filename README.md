@@ -1,6 +1,6 @@
-# Suthipong Toonritsa — Portfolio MVP
+# Suthipong Toonritsa — Client-Focused Portfolio
 
-Static, bilingual software developer portfolio built for `https://suthipongt.github.io/profile/`.
+Static, bilingual portfolio for business websites and custom business software, built for `https://suthipongt.github.io/profile/`.
 
 ## Tooling
 
@@ -27,16 +27,18 @@ pnpm install --frozen-lockfile
 pnpm dev
 pnpm check
 pnpm build
-pnpm verify:build
+pnpm verify
 ```
 
 The static output is `dist/`. English is at `/profile/`; Thai is at `/profile/th/`. `astro.config.mjs` sets `site`, `base`, and static output. The sitemap integration creates `sitemap-index.xml`, referenced from `public/robots.txt`.
 
 ## Content status
 
-The previous site included template biography, employment, education, and portfolio entries. The new MVP does **not** treat those as real. Draft project and experience sections are labeled in both languages. Replace them with verified facts before presenting the site as a completed personal portfolio. The only contact link is the repository owner's public GitHub profile. No previous template images or bundled scripts are used.
+The homepage presents services for corporate websites, CRM systems, CMS platforms, and ERP / business management systems. Its sections are Hero, Selected Work, Services, Technology, Process, About, and Contact. Service categories describe work available for discussion; they are not evidence of completed client projects.
 
-English and Thai copy lives in `src/content/site.ts`. Both routes render HTML at build time. Navigation works without client-side JavaScript.
+English and Thai copy lives in `src/content/site.ts`. Typed project records live in `src/content/projects.ts`. Only records with `status: 'approved'` render. The list is currently empty, so both languages show a short empty state instead of fabricated case studies. A future project record can have multiple imported local screenshots with bilingual alt text and captions, or no screenshots; live and repository URLs are optional. Put approved images under `src/assets/projects/` for Astro image optimization. Verify project facts, image rights, and screenshot privacy before adding any record.
+
+Both language routes render HTML at build time. The only contact link is the repository owner's verified public GitHub profile. The mobile menu uses a small script to close after an anchor is selected. No previous template images or bundled scripts are used.
 
 ## GitHub Pages release plan
 

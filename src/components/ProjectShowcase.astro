@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import type { Locale } from '../content/site';
+import type { Project } from '../content/projects';
+import { copy } from '../content/site';
+
+interface Props { project: Project; locale: Locale; priority?: boolean }
+const { project, locale, priority = false } = Astro.props;
+const t = copy[locale];
+const content = project.content[locale];
+const [lead, ...supporting] = project.screenshots ?? [];
+---
+<article class:list={['project-showcase', { 'project-showcase-text': !lead }]}>
+  {lead && <div class="project-media">
+    <figure>
+      <Image src={lead.image} alt={lead.alt[locale]} layout="constrained" widths={[480, 768, 1200, 1600]} sizes="(min-width: 1000px) 60vw, 100vw" loading={priority ? 'eager' : 'lazy'} decoding="async" />
+      {lead.caption && <figcaption>{lead.caption[locale]}</figcaption>}
+    </figure>
+    {supporting.length > 0 && <div class="project-supporting">
+      {supporting.map((shot) => <figure>
+        <Image src={shot.image} alt={shot.alt[locale]} layout="constrained" widths={[360, 640, 960]} sizes="(min-width: 1000px) 30vw, 100vw" loading="lazy" decoding="async" />
+        {shot.caption && <figcaption>{shot.caption[locale]}</figcaption>}
+      </figure>)}
+    </div>}
+  </div>}
+  <div class="project-copy">
+    <p class="project-category">{t.categoryLabels[project.category]}</p>
+    <h3>{content.name}</h3>
+    <p class="project-summary">{content.summary}</p>
+    <p class="project-description">{content.description}</p>
+    <dl class="project-facts">
+      <div><dt>{t.projectRoleLabel}</dt><dd>{content.role}</dd></div>
+      <div><dt>{t.projectScopeLabel}</dt><dd>{content.scope}</dd></div>
+      <div><dt>{t.projectTechnologyLabel}</dt><dd>{project.technologies.join(' · ')}</dd></div>
+    </dl>
+    {(project.liveUrl || project.repositoryUrl) && <div class="project-links">
+      {project.liveUrl && <a href={project.liveUrl}>{t.projectLiveLabel} <span aria-hidden="true">↗</span></a>}
+      {project.repositoryUrl && <a href={project.repositoryUrl}>{t.projectRepositoryLabel} <span aria-hidden="true">↗</span></a>}
+    </div>}
+  </div>
+</article>

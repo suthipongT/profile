@@ -8,7 +8,7 @@ const pages = [
   { file: 'dist/index.html', lang: 'en', path: base },
   { file: 'dist/th/index.html', lang: 'th', path: `${base}th/` },
 ];
-const sections = ['about', 'expertise', 'stack', 'projects', 'experience', 'contact'];
+const sections = ['work', 'services', 'technology', 'process', 'about', 'contact'];
 
 for (const page of pages) {
   const html = readFileSync(page.file, 'utf8');
@@ -16,6 +16,7 @@ for (const page of pages) {
   assert.match(html, /<main id="main">/, `${page.file}: main landmark`);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1, `${page.file}: one h1`);
   for (const id of sections) assert.ok(html.includes(`id="${id}"`), `${page.file}: missing ${id}`);
+  assert.ok(!html.includes('id="experience"'), `${page.file}: resume section remains`);
   for (const locale of pages) {
     assert.ok(html.includes(`hreflang="${locale.lang}" href="${site}${locale.path}"`), `${page.file}: missing ${locale.lang} alternate`);
   }
