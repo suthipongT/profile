@@ -87,7 +87,7 @@ export const copy: Record<Locale, Copy> = {
     contactBody: 'For now, the verified public GitHub profile is the contact route. A preferred professional contact method can be added after approval.',
     contactAction: 'View GitHub profile',
     footer: 'Built with care. Content under review.',
-    mobileMenu: 'Open navigation menu',
+    mobileMenu: 'Navigation menu',
     metaDescription: 'Suthipong Toonritsa’s software developer portfolio. Explore a modern, bilingual site built with Astro, TypeScript, and Tailwind CSS.',
   },
   th: {
@@ -136,7 +136,7 @@ export const copy: Record<Locale, Copy> = {
     contactBody: 'ขณะนี้ใช้โปรไฟล์ GitHub สาธารณะที่ยืนยันได้เป็นช่องทางติดต่อ สามารถเพิ่มช่องทางติดต่อสำหรับงานหลังได้รับการอนุมัติ',
     contactAction: 'ดูโปรไฟล์ GitHub',
     footer: 'สร้างด้วยความใส่ใจ · เนื้อหาอยู่ระหว่างตรวจสอบ',
-    mobileMenu: 'เปิดเมนูนำทาง',
+    mobileMenu: 'เมนูนำทาง',
     metaDescription: 'พอร์ตโฟลิโอนักพัฒนาซอฟต์แวร์ของ Suthipong Toonritsa เว็บไซต์สองภาษาที่สร้างด้วย Astro, TypeScript และ Tailwind CSS',
   },
 };

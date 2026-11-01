@@ -90,5 +90,12 @@ const navItems = [
         </div>
       </footer>
     </div>
+    <script>
+      document.querySelectorAll<HTMLDetailsElement>('.mobile-nav').forEach((menu) => {
+        menu.querySelectorAll<HTMLAnchorElement>('nav a').forEach((link) => {
+          link.addEventListener('click', () => { menu.open = false; });
+        });
+      });
+    </script>
   </body>
 </html>

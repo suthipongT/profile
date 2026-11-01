@@ -10,11 +10,11 @@ const currentPath = locale === 'en' ? base : `${base}th/`;
 ---
 <BaseLayout locale={locale}>
   <section class="hero section-pad" aria-labelledby="hero-title">
-    <div class="hero-glow" aria-hidden="true"></div>
     <div class="container hero-grid">
       <div class="hero-copy">
         <p class="eyebrow"><span class="eyebrow-line"></span>{t.eyebrow}</p>
-        <h1 id="hero-title">{t.heroTitle}</h1>
+        <h1 id="hero-title">Suthipong Toonritsa</h1>
+        <p class="hero-statement">{t.heroTitle}</p>
         <p class="hero-description">{t.heroDescription}</p>
         <div class="hero-actions">
           <a class="button button-primary" href={`${currentPath}#projects`}>{t.primaryAction}<span aria-hidden="true">↗</span></a>
@@ -23,7 +23,6 @@ const currentPath = locale === 'en' ? base : `${base}th/`;
         <p class="hero-availability"><span class="availability-dot" aria-hidden="true"></span>{t.availability}</p>
       </div>
       <div class="hero-art" aria-hidden="true">
-        <div class="art-orbit art-orbit-one"></div><div class="art-orbit art-orbit-two"></div>
         <div class="terminal-card">
           <div class="terminal-top"><span class="window-dots"><i></i><i></i><i></i></span><span>portfolio.ts</span><span>●</span></div>
           <div class="terminal-content">
@@ -39,8 +38,6 @@ const currentPath = locale === 'en' ? base : `${base}th/`;
           </div>
           <div class="terminal-footer"><span>ASTRO / TYPESCRIPT</span><span class="terminal-cursor">▍</span></div>
         </div>
-        <div class="art-tag art-tag-top">&lt;build /&gt;</div>
-        <div class="art-tag art-tag-bottom">01 — 06</div>
       </div>
     </div>
     <div class="container"><p class="draft-banner"><span aria-hidden="true">✳</span>{t.heroNote}</p></div>
@@ -57,7 +54,7 @@ const currentPath = locale === 'en' ? base : `${base}th/`;
     <div class="container">
       <div class="section-head"><div><p class="section-kicker">{t.expertiseKicker}</p><h2 id="expertise-title">{t.expertiseTitle}</h2></div><p>{t.expertiseIntro}</p></div>
       <div class="expertise-grid">
-        {t.expertise.map((item) => <article class="expertise-card"><span class="card-number">{item.number} / 03</span><div class="card-symbol" aria-hidden="true">↗</div><h3>{item.title}</h3><p>{item.description}</p><span class="card-detail">{item.detail}</span></article>)}
+        {t.expertise.map((item) => <article class="expertise-card"><span class="card-number">{item.number} / 03</span><h3>{item.title}</h3><p>{item.description}</p><span class="card-detail">{item.detail}</span></article>)}
       </div>
     </div>
   </section>
@@ -75,7 +72,7 @@ const currentPath = locale === 'en' ? base : `${base}th/`;
     <div class="container">
       <div class="section-head"><div><p class="section-kicker">{t.projectsKicker}</p><h2 id="projects-title">{t.projectsTitle}</h2></div><p>{t.projectsIntro}</p></div>
       <div class="project-grid">
-        {t.projectCards.map((item, index) => <article class="project-card"><div class={`project-visual visual-${index + 1}`} aria-hidden="true"><span>{index === 0 ? '< />' : index === 1 ? '{ }' : '↗'}</span><div class="visual-grid"></div></div><div class="project-content"><span class="project-number">{item.number}</span><h3>{item.title}</h3><p>{item.description}</p><div class="project-detail">{item.detail}</div></div></article>)}
+        {t.projectCards.map((item) => <article class="project-card"><span class="project-number">{item.number}</span><div class="project-content"><h3>{item.title}</h3><p>{item.description}</p><div class="project-detail">{item.detail}</div></div></article>)}
       </div>
     </div>
   </section>
@@ -88,6 +85,6 @@ const currentPath = locale === 'en' ? base : `${base}th/`;
   </section>
 
   <section id="contact" class="section contact-section" aria-labelledby="contact-title">
-    <div class="container contact-inner"><p class="section-kicker">{t.contactKicker}</p><h2 id="contact-title">{t.contactTitle}</h2><p>{t.contactBody}</p><a class="button button-primary" href="https://github.com/suthipongT">{t.contactAction}<span aria-hidden="true">↗</span></a><div class="contact-decoration" aria-hidden="true">&lt;/&gt;</div></div>
+    <div class="container contact-inner"><p class="section-kicker">{t.contactKicker}</p><h2 id="contact-title">{t.contactTitle}</h2><p>{t.contactBody}</p><a class="button button-primary" href="https://github.com/suthipongT">{t.contactAction}<span aria-hidden="true">↗</span></a></div>
   </section>
 </BaseLayout>
