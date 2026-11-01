@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+import type { Locale } from '../content/site';
+import { copy } from '../content/site';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = copy[locale];
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const enPath = base;
+const thPath = `${base}th/`;
+const currentPath = locale === 'en' ? enPath : thPath;
+const site = 'https://suthipongt.github.io';
+const canonical = new URL(currentPath, site).href;
+const ogImage = new URL(`${base}og-card.svg`, site).href;
+const pageTitle = locale === 'en'
+  ? 'Suthipong Toonritsa | Software Developer'
+  : 'Suthipong Toonritsa | นักพัฒนาซอฟต์แวร์';
+const navItems = [
+  ['about', t.nav.about],
+  ['expertise', t.nav.expertise],
+  ['stack', t.nav.stack],
+  ['projects', t.nav.projects],
+  ['experience', t.nav.experience],
+  ['contact', t.nav.contact],
+] as const;
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#07121c" />
+    <meta name="description" content={t.metaDescription} />
+    <meta name="robots" content="index, follow" />
+    <title>{pageTitle}</title>
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={new URL(enPath, site).href} />
+    <link rel="alternate" hreflang="th" href={new URL(thPath, site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(enPath, site).href} />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Suthipong Toonritsa" />
+    <meta property="og:locale" content={locale === 'en' ? 'en_US' : 'th_TH'} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={t.metaDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Suthipong Toonritsa software developer portfolio graphic" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={t.metaDescription} />
+    <meta name="twitter:image" content={ogImage} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{locale === 'en' ? 'Skip to content' : 'ข้ามไปยังเนื้อหา'}</a>
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="container header-inner">
+          <a class="brand" href={currentPath} aria-label={locale === 'en' ? 'Suthipong, home' : 'Suthipong, หน้าหลัก'}>
+            <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
+            <span class="brand-name">SUTHIPONG<span class="brand-dot">.</span></span>
+          </a>
+          <nav class="desktop-nav" aria-label={locale === 'en' ? 'Primary navigation' : 'เมนูหลัก'}>
+            {navItems.map(([id, label]) => <a href={`${currentPath}#${id}`}>{label}</a>)}
+          </nav>
+          <div class="header-actions">
+            <nav class="language-switch" aria-label={locale === 'en' ? 'Language' : 'ภาษา'}>
+              <a href={enPath} lang="en" aria-current={locale === 'en' ? 'page' : undefined}>EN</a>
+              <span aria-hidden="true">/</span>
+              <a href={thPath} lang="th" aria-current={locale === 'th' ? 'page' : undefined}>TH</a>
+            </nav>
+            <details class="mobile-nav">
+              <summary aria-label={t.mobileMenu}>
+                <span></span><span></span><span></span>
+              </summary>
+              <nav aria-label={locale === 'en' ? 'Mobile navigation' : 'เมนูมือถือ'}>
+                {navItems.map(([id, label]) => <a href={`${currentPath}#${id}`}>{label}<span aria-hidden="true">↗</span></a>)}
+              </nav>
+            </details>
+          </div>
+        </div>
+      </header>
+      <main id="main"><slot /></main>
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <span>© {new Date().getFullYear()} Suthipong Toonritsa</span>
+          <span>{t.footer}</span>
+          <a href="#main">{locale === 'en' ? 'Back to top ↑' : 'กลับด้านบน ↑'}</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
