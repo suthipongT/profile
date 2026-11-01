@@ -12,14 +12,17 @@ Static, bilingual software developer portfolio built for `https://suthipongt.git
 | PostCSS | 8.5.32 |
 | @astrojs/sitemap | 3.7.4 |
 | @astrojs/check | 0.9.12 |
-| pnpm | 11.9.0 |
-| Node.js used for initial build | 22.22.2 |
+| pnpm | 12.16.1 |
+| Node.js | 24.22.2 |
 
 Exact dependency versions are recorded in `package.json` and `pnpm-lock.yaml`.
 
 ## Local development
 
 ```sh
+nvm use
+node -v
+pnpm -v
 pnpm install --frozen-lockfile
 pnpm dev
 pnpm check
@@ -37,6 +40,6 @@ English and Thai copy lives in `src/content/site.ts`. Both routes render HTML at
 
 ## GitHub Pages release plan
 
-After review, configure Pages to use GitHub Actions. The workflow should install with pnpm using the committed lockfile, run `pnpm check` and `pnpm build`, then upload `dist/` as the Pages artifact and deploy only from an approved release branch. The feature branch does not deploy automatically.
+The build-only workflow in `.github/workflows/verify.yml` selects Node.js `24.22.2` from `.nvmrc` and pnpm `12.16.1`. It runs on pull requests or manual dispatch and never deploys. After review, configure Pages to use GitHub Actions. Any future deployment workflow must use the same pinned versions, install with pnpm using the committed lockfile, run `pnpm check` and `pnpm build`, then upload `dist/` as the Pages artifact and deploy only from an approved release branch. The feature branch does not deploy automatically.
 
 The original site remains recoverable from Git history at commit `c3e0d5b2fa41f88d0dd41f23deda5b3995b313f2`. No history rewrite is required.
