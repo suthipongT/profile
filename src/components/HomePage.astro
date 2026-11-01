@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectTile from './ProjectTile.astro';
+import type { Locale } from '../content/site';
+import { pagesCopy, pagePath } from '../content/pages';
+import { approvedProjects } from '../content/projects';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = pagesCopy[locale];
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const preview = import.meta.env.PUBLIC_PORTFOLIO_PREVIEW === 'true';
+const projects = preview ? (await import('../content/demo-projects')).demoProjects : approvedProjects;
+---
+<BaseLayout locale={locale} page="home">
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="container hero-center">
+      <p class="hero-tag">{t.heroTag}</p>
+      <h1 id="home-title">{t.heroLead}<br /><span>{t.heroFocus}</span></h1>
+      <p class="hero-intro">{t.heroBody}</p>
+      <div class="hero-buttons">
+        <a class="button button-dark" href={pagePath(base, locale, 'portfolio')}>{t.heroWork} <span aria-hidden="true">↗</span></a>
+        <a class="button button-outline" href={pagePath(base, locale, 'contact')}>{t.heroContact}</a>
+      </div>
+      <p class="hero-services" aria-label={t.servicesTitle}>{locale === 'en' ? 'CORPORATE WEBSITES  /  CRM  /  CMS  /  ERP' : 'เว็บไซต์องค์กร  /  CRM  /  CMS  /  ERP'}</p>
+    </div>
+  </section>
+  <section class="featured-section" aria-labelledby="featured-title">
+    <div class="container">
+      <div class="center-heading"><h2 id="featured-title">{t.featuredTitle}</h2><p>{preview ? t.featuredPreview : t.featuredProduction}</p></div>
+      {projects.length > 0 ? <div class="featured-grid">{projects.slice(0, 2).map((project) => <ProjectTile project={project} locale={locale} demo={preview} compact />)}</div> : <div class="empty-state"><h3>{t.emptyTitle}</h3><p>{t.emptyBody}</p></div>}
+      <div class="center-action"><a class="button button-outline" href={pagePath(base, locale, 'portfolio')}>{t.viewAll} <span aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+</BaseLayout>

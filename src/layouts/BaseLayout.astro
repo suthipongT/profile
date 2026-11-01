@@ -1,46 +1,36 @@
 ---
 import '../styles/global.css';
 import type { Locale } from '../content/site';
-import { copy } from '../content/site';
+import { pagePath, pagesCopy, type Page } from '../content/pages';
 
-interface Props { locale: Locale }
-const { locale } = Astro.props;
-const t = copy[locale];
+interface Props { locale: Locale; page: Page }
+const { locale, page } = Astro.props;
+const t = pagesCopy[locale];
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const enPath = base;
-const thPath = `${base}th/`;
-const currentPath = locale === 'en' ? enPath : thPath;
-const site = Astro.site ?? new URL('https://suthipongt.github.io');
 const preview = import.meta.env.PUBLIC_PORTFOLIO_PREVIEW === 'true';
+const site = Astro.site ?? new URL('https://suthipongt.github.io');
+const currentPath = pagePath(base, locale, page);
 const canonical = new URL(currentPath, site).href;
-const ogImage = new URL(`${base}og-card.svg`, site).href;
-const pageTitle = preview ? `${t.previewTitlePrefix} | ${t.metaTitle}` : t.metaTitle;
-const pageDescription = preview ? t.previewMetaDescription : t.metaDescription;
-const navItems = [
-  ['work', t.nav.work],
-  ['services', t.nav.services],
-  ['technology', t.nav.technology],
-  ['process', t.nav.process],
-  ['about', t.nav.about],
-  ['contact', t.nav.contact],
-] as const;
+const pageTitle = `${preview ? `${locale === 'en' ? 'Design preview' : 'พรีวิวงานออกแบบ'} | ` : ''}${t.meta[page][0]}`;
+const pageDescription = preview ? `${t.meta[page][1]} ${t.previewBanner}` : t.meta[page][1];
+const navPages: Page[] = ['home', 'portfolio', 'about', 'contact'];
 ---
 <!doctype html>
 <html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#07121c" />
+    <meta name="theme-color" content="#FFFFFF" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta name="robots" content={preview ? 'noindex, nofollow, noarchive' : 'index, follow'} />
-    <title>{pageTitle}</title>
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={new URL(enPath, site).href} />
-    <link rel="alternate" hreflang="th" href={new URL(thPath, site).href} />
-    <link rel="alternate" hreflang="x-default" href={new URL(enPath, site).href} />
+    <link rel="alternate" hreflang="en" href={new URL(pagePath(base, 'en', page), site).href} />
+    <link rel="alternate" hreflang="th" href={new URL(pagePath(base, 'th', page), site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(pagePath(base, 'en', page), site).href} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Suthipong Toonritsa" />
@@ -48,78 +38,48 @@ const navItems = [
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:alt" content="Suthipong Toonritsa software development portfolio graphic" />
+    <meta property="og:image" content={new URL(`${base}og-card.svg`, site).href} />
+    <meta property="og:image:alt" content={locale === 'en' ? 'Suthipong Toonritsa software development portfolio graphic' : 'ภาพกราฟิกพอร์ตโฟลิโอพัฒนาซอฟต์แวร์ของ Suthipong Toonritsa'} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content={ogImage} />
   </head>
-  <body>
-    <a class="skip-link" href="#main">{locale === 'en' ? 'Skip to content' : 'ข้ามไปยังเนื้อหา'}</a>
+  <body class:list={[`page-${page}`, { 'is-preview': preview }]}>
+    <a class="skip-link" href="#main">{t.skip}</a>
     {preview && <div class="preview-banner" role="note">{t.previewBanner}</div>}
-    <div class="site-shell">
-      <header class="site-header">
-        <div class="container header-inner">
-          <a class="brand" href={currentPath} aria-label={locale === 'en' ? 'Suthipong, home' : 'Suthipong, หน้าหลัก'}>
-            <span class="brand-mark" aria-hidden="true">ST<span>.</span></span>
-            <span class="brand-name">SUTHIPONG<span class="brand-dot">.</span></span>
-          </a>
-          <nav class="desktop-nav" aria-label={locale === 'en' ? 'Primary navigation' : 'เมนูหลัก'}>
-            {navItems.filter(([id]) => id !== 'contact').map(([id, label]) => <a href={`${currentPath}#${id}`}>{label}</a>)}
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href={pagePath(base, locale, 'home')} aria-label={locale === 'en' ? 'Suthipong, home' : 'Suthipong, หน้าแรก'}>Suthipong<span aria-hidden="true">.</span></a>
+        <nav class="desktop-nav" aria-label={locale === 'en' ? 'Primary navigation' : 'เมนูหลัก'}>
+          {navPages.map((item) => <a href={pagePath(base, locale, item)} aria-current={item === page ? 'page' : undefined}>{t.nav[item]}</a>)}
+        </nav>
+        <div class="header-actions">
+          <nav class="language-switch" aria-label={locale === 'en' ? 'Language' : 'ภาษา'}>
+            <a lang="en" href={pagePath(base, 'en', page)} aria-current={locale === 'en' ? 'page' : undefined}>EN</a><span aria-hidden="true">/</span><a lang="th" href={pagePath(base, 'th', page)} aria-current={locale === 'th' ? 'page' : undefined}>TH</a>
           </nav>
-          <div class="header-actions">
-            <nav class="language-switch" aria-label={locale === 'en' ? 'Language' : 'ภาษา'}>
-              <a href={enPath} lang="en" aria-current={locale === 'en' ? 'page' : undefined}>EN</a>
-              <span aria-hidden="true">/</span>
-              <a href={thPath} lang="th" aria-current={locale === 'th' ? 'page' : undefined}>TH</a>
+          <details class="mobile-nav">
+            <summary aria-label={t.menu}><span></span><span></span><span></span></summary>
+            <nav aria-label={locale === 'en' ? 'Mobile navigation' : 'เมนูมือถือ'}>
+              {navPages.map((item) => <a href={pagePath(base, locale, item)} aria-current={item === page ? 'page' : undefined}>{t.nav[item]}</a>)}
             </nav>
-            <a class="header-contact" href={`${currentPath}#contact`} aria-label={t.headerAction}><span>{t.headerAction}</span><b aria-hidden="true">↗</b></a>
-            <details class="mobile-nav">
-              <summary aria-label={t.mobileMenu}>
-                <span></span><span></span><span></span>
-              </summary>
-              <nav aria-label={locale === 'en' ? 'Mobile navigation' : 'เมนูมือถือ'}>
-                {navItems.map(([id, label]) => <a href={`${currentPath}#${id}`}>{label}<span aria-hidden="true">↗</span></a>)}
-              </nav>
-            </details>
-          </div>
+          </details>
         </div>
-      </header>
-      <main id="main"><slot /></main>
-      <footer class="site-footer">
-        <div class="container footer-inner">
-          <span>© {new Date().getFullYear()} Suthipong Toonritsa</span>
-          <span>{t.footer}</span>
-          <a href="#main">{locale === 'en' ? 'Back to top ↑' : 'กลับด้านบน ↑'}</a>
-        </div>
-      </footer>
-    </div>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div><a class="footer-brand" href={pagePath(base, locale, 'home')}>Suthipong<span>.</span></a><p>{t.footerBody}</p><a class="footer-github" href="https://github.com/suthipongT" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+        <nav aria-label={t.footerLinks}><strong>{t.footerLinks}</strong>{navPages.map((item) => <a href={pagePath(base, locale, item)}>{t.nav[item]}</a>)}</nav>
+      </div>
+      <div class="container footer-bottom"><span>© {new Date().getFullYear()} Suthipong Toonritsa</span><span>{t.footerNote}</span></div>
+    </footer>
     <script>
       document.querySelectorAll<HTMLDetailsElement>('.mobile-nav').forEach((menu) => {
-        menu.querySelectorAll<HTMLAnchorElement>('nav a').forEach((link) => {
-          link.addEventListener('click', () => { menu.open = false; });
-        });
+        menu.querySelectorAll('nav a').forEach((link) => link.addEventListener('click', () => { menu.open = false; }));
         menu.addEventListener('keydown', (event) => {
-          if (event.key === 'Escape' && menu.open) {
-            menu.open = false;
-            menu.querySelector('summary')?.focus();
-          }
+          if (event.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary')?.focus(); }
         });
+        document.addEventListener('click', (event) => { if (menu.open && !menu.contains(event.target as Node)) menu.open = false; });
       });
-      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            const element = entry.target as HTMLElement;
-            window.setTimeout(() => element.classList.add('is-revealed'), 900);
-            element.classList.add('will-reveal');
-            requestAnimationFrame(() => element.classList.add('is-revealed'));
-            observer.unobserve(element);
-          });
-        }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
-        document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((element) => observer.observe(element));
-      }
     </script>
   </body>
 </html>

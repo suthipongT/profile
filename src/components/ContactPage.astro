@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Locale } from '../content/site';
+import { pagesCopy } from '../content/pages';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = pagesCopy[locale];
+const preview = import.meta.env.PUBLIC_PORTFOLIO_PREVIEW === 'true';
+---
+<BaseLayout locale={locale} page="contact">
+  <div class="page-intro container"><h1>{t.contactTitle}</h1><p>{t.contactIntro}</p></div>
+  <div class="container contact-grid">
+    <section class="contact-message" aria-labelledby="message-title">
+      <h2 id="message-title">{t.messageTitle}</h2>
+      {preview ? <div class="form-preview" aria-label={t.formNotice}>
+        <p class="form-notice">{t.formNotice}</p>
+        {t.formFields.map((label, index) => <div class="form-row"><span>{label}</span><span class:list={['form-surface', { 'form-surface-large': index === 3 }]} aria-hidden="true"></span></div>)}
+        <span class="form-unavailable">{t.formButton}</span>
+      </div> : <div class="contact-prompt"><p>{t.contactInfoBody}</p><a class="button button-dark" href="https://github.com/suthipongT" target="_blank" rel="noopener noreferrer">{t.github} <span aria-hidden="true">↗</span></a></div>}
+    </section>
+    <section class="contact-information" aria-labelledby="contact-info-title">
+      <h2 id="contact-info-title">{t.contactInfoTitle}</h2>
+      <div class="contact-info-item"><span class="contact-info-icon" aria-hidden="true">↗</span><div><span>GitHub</span><a href="https://github.com/suthipongT" target="_blank" rel="noopener noreferrer">github.com/suthipongT</a></div></div>
+      <div class="contact-connect"><h3>{t.connectTitle}</h3><p>{t.connectBody}</p><a class="button button-dark" href="https://github.com/suthipongT" target="_blank" rel="noopener noreferrer">{t.github} <span aria-hidden="true">↗</span></a></div>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectTile from './ProjectTile.astro';
+import type { Locale } from '../content/site';
+import { copy } from '../content/site';
+import { pagesCopy } from '../content/pages';
+import { approvedProjects } from '../content/projects';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = pagesCopy[locale];
+const preview = import.meta.env.PUBLIC_PORTFOLIO_PREVIEW === 'true';
+const projects = preview ? (await import('../content/demo-projects')).demoProjects : approvedProjects;
+const categories = ['corporate-website', 'crm', 'cms', 'erp-business-management'] as const;
+---
+<BaseLayout locale={locale} page="portfolio">
+  <div class="page-intro portfolio-intro container">
+    <h1>{t.portfolioTitle}</h1><p>{preview ? t.portfolioPreviewIntro : t.portfolioIntro}</p>
+  </div>
+  <section class="gallery-section container" aria-label={t.portfolioTitle}>
+    {preview && <p class="sample-note">{t.sampleNote}</p>}
+    {projects.length > 0 && <div class="filter-list" role="group" aria-label={locale === 'en' ? 'Filter projects by category' : 'กรองผลงานตามประเภท'}>
+      <button type="button" class="filter-button" data-filter="all" aria-pressed="true">{t.all}</button>
+      {categories.map((category) => <button type="button" class="filter-button" data-filter={category} aria-pressed="false">{copy[locale].categoryLabels[category]}</button>)}
+    </div>}
+    {projects.length > 0 ? <div class="portfolio-grid">{projects.map((project) => <ProjectTile project={project} locale={locale} demo={preview} />)}</div> : <div class="empty-state"><h2>{t.emptyTitle}</h2><p>{t.emptyBody}</p></div>}
+  </section>
+  <script>
+    const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+    const tiles = [...document.querySelectorAll<HTMLElement>('.portfolio-grid .project-tile')];
+    buttons.forEach((button) => button.addEventListener('click', () => {
+      const value = button.dataset.filter;
+      buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      tiles.forEach((tile) => { tile.hidden = value !== 'all' && tile.dataset.category !== value; });
+    }));
+  </script>
+</BaseLayout>
