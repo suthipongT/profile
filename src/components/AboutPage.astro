@@ -12,10 +12,10 @@ const t = pagesCopy[locale];
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const skills = copy[locale].technologyGroups.flatMap((group) => group.items);
 const processSteps = [
-  { icon: 'discovery', label: t.steps[0] },
-  { icon: 'planning', label: t.steps[1] },
-  { icon: 'development', label: t.steps[2] },
-  { icon: 'handover', label: t.steps[3] },
+  { icon: 'discovery', label: t.steps[0], description: t.stepDescriptions[0] },
+  { icon: 'planning', label: t.steps[1], description: t.stepDescriptions[1] },
+  { icon: 'development', label: t.steps[2], description: t.stepDescriptions[2] },
+  { icon: 'handover', label: t.steps[3], description: t.stepDescriptions[3] },
 ] as const;
 ---
 <BaseLayout locale={locale} page="about">
@@ -25,6 +25,6 @@ const processSteps = [
       <div class="about-hero-copy"><h1 id="about-title">{t.aboutLead} <span>{t.aboutFocus}</span></h1><p>{t.aboutBody1}</p><p>{t.aboutBody2}</p><p class="small-note">{t.aboutNote}</p><a class="text-link" href={pagePath(base, locale, 'contact')}>{t.heroContact} <ActionIcon name="arrow-right" /></a></div>
     </section>
     <section class="skills-section" aria-labelledby="skills-title"><div class="center-heading"><h2 id="skills-title">{t.skillsTitle}</h2><p>{t.skillsIntro}</p></div><ul class="skill-list">{skills.map((skill) => <li>{skill}</li>)}</ul></section>
-    <section class="process-section" aria-labelledby="process-title"><div class="center-heading"><h2 id="process-title">{t.processTitle}</h2><p>{t.processIntro}</p></div><ol class="process-grid">{processSteps.map((step, index) => <li><div class="process-marker"><ProcessIcon name={step.icon} /></div><h3><span class="process-number">0{index + 1}</span> {step.label}</h3></li>)}</ol></section>
+    <section class="process-section" aria-labelledby="process-title"><div class="center-heading"><h2 id="process-title">{t.processTitle}</h2><p>{t.processIntro}</p></div><ol class="process-grid">{processSteps.map((step) => <li><div class="process-marker"><ProcessIcon name={step.icon} /></div><h3>{step.label}</h3><p>{step.description}</p></li>)}</ol></section>
   </div>
 </BaseLayout>
