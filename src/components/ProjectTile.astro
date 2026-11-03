@@ -22,7 +22,6 @@ const imageSrc = (src: string) => src.startsWith(base) ? src : `${base}${src.rep
     <span class="tile-image-action" aria-hidden="true">↗</span>
   </a>}
   <div class="tile-content">
-    {demo && <p class="demo-label">{t.sample}</p>}
     <p class="tile-category">{copy[locale].categoryLabels[project.category]}</p>
     <h3>{content.name}</h3>
     <p class="tile-summary">{content.summary}</p>

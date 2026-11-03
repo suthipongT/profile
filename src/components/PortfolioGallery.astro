@@ -18,7 +18,6 @@ const categories = ['corporate-website', 'crm', 'cms', 'erp-business-management'
     <h1>{t.portfolioTitle}</h1><p>{preview ? t.portfolioPreviewIntro : t.portfolioIntro}</p>
   </div>
   <section class="gallery-section container" aria-label={t.portfolioTitle}>
-    {preview && <p class="sample-note">{t.sampleNote}</p>}
     {projects.length > 0 && <div class="filter-list" role="group" aria-label={locale === 'en' ? 'Filter projects by category' : 'กรองผลงานตามประเภท'}>
       <button type="button" class="filter-button" data-filter="all" aria-pressed="true">{t.all}</button>
       {categories.map((category) => <button type="button" class="filter-button" data-filter={category} aria-pressed="false">{copy[locale].categoryLabels[category]}</button>)}

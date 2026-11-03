@@ -29,14 +29,14 @@ for (const page of pages) {
   }
   const expectedDemoCount = preview ? page.name === 'portfolio' ? 4 : page.name === 'home' ? 2 : 0 : 0;
   assert.equal((html.match(/data-demo-project=/g) ?? []).length, expectedDemoCount, `${page.file}: demo isolation`);
-  if (preview) {
-    assert.ok(html.includes('class="preview-banner"'), `${page.file}: preview banner`);
-    if (expectedDemoCount) assert.ok(html.includes(page.lang === 'en' ? 'DEMO / FICTIONAL DESIGN SAMPLE' : 'เดโม / ตัวอย่างงานออกแบบสมมติ'), `${page.file}: demo label`);
-  } else {
+  assert.ok(!html.includes('class="preview-banner"'), `${page.file}: visible preview banner`);
+  assert.ok(!html.includes('class="demo-label"'), `${page.file}: repeated demo label`);
+  if (preview && page.name === 'portfolio') {
+    assert.ok(html.includes(page.lang === 'en' ? 'Concept projects — illustrative website and software designs.' : 'ผลงานแนวคิดการออกแบบเว็บไซต์และระบบซอฟต์แวร์'), `${page.file}: concept disclosure`);
+  }
+  if (!preview) {
     assert.ok(!html.includes('data-demo-project='), `${page.file}: demo project in production`);
-    assert.ok(!html.includes('DEMO / FICTIONAL DESIGN SAMPLE'), `${page.file}: demo label in production`);
-    assert.ok(!html.includes('เดโม / ตัวอย่างงานออกแบบสมมติ'), `${page.file}: Thai demo label in production`);
-    assert.ok(!html.includes('class="preview-banner"'), `${page.file}: preview banner in production`);
+    for (const name of ['Fieldnote', 'Relay', 'Commonplace', 'Ledgerway']) assert.ok(!html.includes(name), `${page.file}: concept project in production`);
   }
   if (page.name === 'contact') assert.ok(!html.includes('<form'), `${page.file}: contact form would collect data`);
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
