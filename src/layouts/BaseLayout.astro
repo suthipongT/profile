@@ -33,20 +33,20 @@ const navPages: Page[] = ['home', 'portfolio', 'about', 'contact'];
     <link rel="alternate" hreflang="x-default" href={new URL(pagePath(base, 'th', page), site).href} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Suthipong Toonritsa" />
+    <meta property="og:site_name" content="A27DEV" />
     <meta property="og:locale" content={locale === 'en' ? 'en_US' : 'th_TH'} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(`${base}og-card.svg`, site).href} />
-    <meta property="og:image:alt" content={locale === 'en' ? 'Suthipong Toonritsa software development portfolio graphic' : 'ภาพกราฟิกพอร์ตโฟลิโอพัฒนาโปรแกรมของ Suthipong Toonritsa'} />
+    <meta property="og:image:alt" content={locale === 'en' ? 'A27DEV software development portfolio graphic' : 'ภาพกราฟิกพอร์ตโฟลิโอพัฒนาโปรแกรมของ A27DEV'} />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body class:list={[`page-${page}`, { 'is-preview': preview }]}>
     <a class="skip-link" href="#main">{t.skip}</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href={pagePath(base, locale, 'home')} aria-label={locale === 'en' ? 'Suthipong, home' : 'Suthipong, หน้าแรก'}>Suthipong<span aria-hidden="true">.</span></a>
+        <a class="brand" href={pagePath(base, locale, 'home')} aria-label={locale === 'en' ? 'A27DEV, home' : 'A27DEV, หน้าแรก'}>A27DEV</a>
         <nav class="desktop-nav" aria-label={locale === 'en' ? 'Primary navigation' : 'เมนูหลัก'}>
           {navPages.map((item) => <a href={pagePath(base, locale, item)} aria-current={item === page ? 'page' : undefined}>{t.nav[item]}</a>)}
         </nav>
@@ -66,7 +66,7 @@ const navPages: Page[] = ['home', 'portfolio', 'about', 'contact'];
     <main id="main"><slot /></main>
     <footer class="site-footer">
       <div class="container footer-grid">
-        <div><a class="footer-brand" href={pagePath(base, locale, 'home')}>Suthipong<span>.</span></a><p>{t.footerBody}</p></div>
+        <div><a class="footer-brand" href={pagePath(base, locale, 'home')}>A27DEV</a><p>{t.footerBody}</p></div>
         <nav aria-label={t.footerLinks}><strong>{t.footerLinks}</strong>{navPages.map((item) => <a href={pagePath(base, locale, item)}>{t.nav[item]}</a>)}</nav>
       </div>
       <div class="container footer-bottom"><span>© {new Date().getFullYear()} Suthipong Toonritsa</span><span>{t.footerNote}</span></div>

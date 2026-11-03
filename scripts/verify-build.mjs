@@ -26,6 +26,8 @@ for (const page of pages) {
   assert.match(html, new RegExp(`<html lang="${page.lang}"`), `${page.file}: language`);
   if (page.lang === 'th') assert.doesNotMatch(html, /ซอฟต์แวร์|เลย์เอาต์/, `${page.file}: Thai terminology`);
   if (page.name === 'about') assert.ok(!html.includes('class="eyebrow"'), `${page.file}: about eyebrow removed`);
+  assert.ok(html.includes('content="A27DEV"') && html.includes('<title>') && html.includes('A27DEV'), `${page.file}: brand metadata`);
+  assert.equal((html.match(/Suthipong Toonritsa/g) ?? []).length, 1, `${page.file}: name only in footer`);
   assert.ok(html.includes('<main id="main">'), `${page.file}: main landmark`);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1, `${page.file}: one h1`);
   assert.ok(html.includes('fonts.googleapis.com/css2?family=Prompt'), `${page.file}: Prompt font`);

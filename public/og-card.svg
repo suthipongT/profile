@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Suthipong Toonritsa software developer portfolio">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="A27DEV software development portfolio">
   <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#07121c"/><stop offset="1" stop-color="#102b3e"/></linearGradient></defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
   <circle cx="1040" cy="60" r="340" fill="#114d60" opacity=".28"/>
   <path d="M80 125h1040M80 505h1040" stroke="#275267"/>
   <text x="80" y="245" fill="#63e6de" font-family="Arial,sans-serif" font-size="28" letter-spacing="8">SOFTWARE DEVELOPER</text>
-  <text x="80" y="357" fill="#f2f7f8" font-family="Arial,sans-serif" font-size="78" font-weight="700">Suthipong Toonritsa</text>
+  <text x="80" y="357" fill="#f2f7f8" font-family="Arial,sans-serif" font-size="78" font-weight="700">A27DEV</text>
   <text x="80" y="430" fill="#a9c1ca" font-family="Arial,sans-serif" font-size="31">Portfolio · English / Thai</text>
   <text x="80" y="565" fill="#63e6de" font-family="Arial,sans-serif" font-size="25">suthipongt.github.io/profile/</text>
 </svg>

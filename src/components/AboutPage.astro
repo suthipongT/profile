@@ -22,9 +22,9 @@ const processSteps = [
   <div class="container about-wrap">
     <section class="about-hero" aria-labelledby="about-title">
       <div class="about-art" aria-hidden="true"><div class="about-art-frame"><div class="about-art-top"><span></span><span></span><span></span></div><div class="about-art-columns"><div class="about-art-rail"><i></i><i></i><i></i><i></i></div><div class="about-art-main"><div class="about-art-block"></div><div class="about-art-lines"><i></i><i></i><i></i></div><div class="about-art-panels"><i></i><i></i></div></div></div></div><p>{locale === 'en' ? 'WEB / SOFTWARE / SYSTEMS' : 'เว็บไซต์ / โปรแกรม / ระบบ'}</p></div>
-      <div class="about-hero-copy"><h1 id="about-title">{t.aboutLead}<br /><span>{t.aboutFocus}</span></h1><p>{t.aboutBody1}</p><p>{t.aboutBody2}</p><p class="small-note">{t.aboutNote}</p><a class="text-link" href={pagePath(base, locale, 'contact')}>{t.heroContact} <ActionIcon name="arrow-right" /></a></div>
+      <div class="about-hero-copy"><h1 id="about-title">{t.aboutLead} <span>{t.aboutFocus}</span></h1><p>{t.aboutBody1}</p><p>{t.aboutBody2}</p><p class="small-note">{t.aboutNote}</p><a class="text-link" href={pagePath(base, locale, 'contact')}>{t.heroContact} <ActionIcon name="arrow-right" /></a></div>
     </section>
     <section class="skills-section" aria-labelledby="skills-title"><div class="center-heading"><h2 id="skills-title">{t.skillsTitle}</h2><p>{t.skillsIntro}</p></div><ul class="skill-list">{skills.map((skill) => <li>{skill}</li>)}</ul></section>
-    <section class="process-section" aria-labelledby="process-title"><div class="center-heading"><h2 id="process-title">{t.processTitle}</h2><p>{t.processIntro}</p></div><ol class="process-grid">{processSteps.map((step, index) => <li><div class="process-marker"><ProcessIcon name={step.icon} /><span aria-hidden="true">0{index + 1}</span></div><h3>{step.label}</h3></li>)}</ol></section>
+    <section class="process-section" aria-labelledby="process-title"><div class="center-heading"><h2 id="process-title">{t.processTitle}</h2><p>{t.processIntro}</p></div><ol class="process-grid">{processSteps.map((step, index) => <li><div class="process-marker"><ProcessIcon name={step.icon} /></div><h3><span class="process-number">0{index + 1}</span> {step.label}</h3></li>)}</ol></section>
   </div>
 </BaseLayout>
