@@ -32,7 +32,7 @@ export const copy: Record<Locale, Copy> = {
       'erp-business-management': 'ระบบ ERP / บริหารธุรกิจ',
     },
     technologyGroups: [
-      { title: 'การพัฒนาส่วนติดต่อ', items: ['เลย์เอาต์รองรับหลายหน้าจอ', 'เมนูที่เข้าถึงได้', 'หน้าเว็บภาษาอังกฤษ / ไทย'] },
+      { title: 'การพัฒนาส่วนติดต่อ', items: ['layoutรองรับหลายหน้าจอ', 'เมนูที่เข้าถึงได้', 'หน้าเว็บภาษาอังกฤษ / ไทย'] },
       { title: 'เทคโนโลยีเว็บ', items: ['Astro', 'TypeScript', 'Tailwind CSS'] },
       { title: 'การส่งมอบและคุณภาพ', items: ['Static Site Generation', 'ข้อมูล SEO', 'Static hosting', 'pnpm'] },
     ],

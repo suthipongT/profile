@@ -24,6 +24,8 @@ const pages = ['en', 'th'].flatMap((lang) => pageNames.map((name) => {
 for (const page of pages) {
   const html = readFileSync(page.file, 'utf8');
   assert.match(html, new RegExp(`<html lang="${page.lang}"`), `${page.file}: language`);
+  if (page.lang === 'th') assert.doesNotMatch(html, /ซอฟต์แวร์|เลย์เอาต์/, `${page.file}: Thai terminology`);
+  if (page.name === 'about') assert.ok(!html.includes('class="eyebrow"'), `${page.file}: about eyebrow removed`);
   assert.ok(html.includes('<main id="main">'), `${page.file}: main landmark`);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1, `${page.file}: one h1`);
   assert.ok(html.includes('fonts.googleapis.com/css2?family=Prompt'), `${page.file}: Prompt font`);
