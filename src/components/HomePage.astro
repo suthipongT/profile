@@ -15,7 +15,6 @@ const projects = preview ? (await import('../content/demo-projects')).demoProjec
 <BaseLayout locale={locale} page="home">
   <section class="home-hero" aria-labelledby="home-title">
     <div class="container hero-center">
-      <p class="hero-tag">{t.heroTag}</p>
       <h1 id="home-title">{t.heroLead}<br /><span>{t.heroFocus}</span></h1>
       <p class="hero-intro">{t.heroBody}</p>
       <div class="hero-buttons">

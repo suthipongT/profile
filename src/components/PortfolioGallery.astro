@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectTile from './ProjectTile.astro';
+import CategoryIcon from './CategoryIcon.astro';
 import type { Locale } from '../content/site';
 import { copy } from '../content/site';
 import { pagesCopy } from '../content/pages';
@@ -20,7 +21,7 @@ const categories = ['corporate-website', 'crm', 'cms', 'erp-business-management'
   <section class="gallery-section container" aria-label={t.portfolioTitle}>
     {projects.length > 0 && <div class="filter-list" role="group" aria-label={locale === 'en' ? 'Filter projects by category' : 'กรองผลงานตามประเภท'}>
       <button type="button" class="filter-button" data-filter="all" aria-pressed="true">{t.all}</button>
-      {categories.map((category) => <button type="button" class="filter-button" data-filter={category} aria-pressed="false">{copy[locale].categoryLabels[category]}</button>)}
+      {categories.map((category) => <button type="button" class="filter-button" data-filter={category} aria-pressed="false"><CategoryIcon category={category} />{copy[locale].categoryLabels[category]}</button>)}
     </div>}
     {projects.length > 0 ? <div class="portfolio-grid">{projects.map((project) => <ProjectTile project={project} locale={locale} demo={preview} />)}</div> : <div class="empty-state"><h2>{t.emptyTitle}</h2><p>{t.emptyBody}</p></div>}
   </section>
