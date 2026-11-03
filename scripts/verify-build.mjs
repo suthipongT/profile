@@ -38,7 +38,11 @@ for (const page of pages) {
     assert.ok(!html.includes('data-demo-project='), `${page.file}: demo project in production`);
     for (const name of ['Fieldnote', 'Relay', 'Commonplace', 'Ledgerway']) assert.ok(!html.includes(name), `${page.file}: concept project in production`);
   }
-  if (page.name === 'contact') assert.ok(!html.includes('<form'), `${page.file}: contact form would collect data`);
+  assert.ok(!/href=["']https?:\/\/(?:[^/]+\.)?github\.com(?:[/:?#]|["'])/i.test(html), `${page.file}: GitHub navigation`);
+  if (page.name === 'contact') {
+    assert.ok(!html.includes('<form'), `${page.file}: contact form would collect data`);
+    assert.ok(html.includes(page.lang === 'en' ? 'A contact channel is not available yet.' : 'ขณะนี้ยังไม่มีช่องทางติดต่อ'), `${page.file}: contact availability`);
+  }
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const url = match[1];
     if (!url || url.startsWith('#') || /^https?:/.test(url) || url.startsWith('mailto:')) continue;

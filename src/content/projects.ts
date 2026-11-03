@@ -16,7 +16,6 @@ export type Project = {
   technologies: readonly string[];
   screenshots?: readonly { image: ImageMetadata; alt: Localized; caption?: Localized }[];
   liveUrl?: string;
-  repositoryUrl?: string;
 };
 export type DemoProject = Omit<Project, 'status'> & { kind: 'demo' };
 export type ShowcaseProject = Project | DemoProject;
