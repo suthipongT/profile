@@ -33,11 +33,6 @@ const liveUrl = !demo && 'status' in project && project.status === 'approved' ? 
     <p class="tile-summary">{content.summary}</p>
     {!compact && <>
       <p class="tile-description">{content.description}</p>
-      <dl class="tile-facts">
-        <div><dt>{demo ? t.role : t.realRole}</dt><dd>{content.role}</dd></div>
-        <div><dt>{demo ? t.scope : t.realScope}</dt><dd>{content.scope}</dd></div>
-        <div><dt>{demo ? t.technology : t.realTechnology}</dt><dd>{project.technologies.join(' · ')}</dd></div>
-      </dl>
       {supporting.length > 0 && <div class="tile-supporting">{supporting.map((shot) => <a href={imageSrc(shot.image.src)} target="_blank" rel="noopener noreferrer" aria-label={`${t.imageLink}: ${content.name}`}>
         {shot.image.format === 'svg' ? <img src={imageSrc(shot.image.src)} alt={shot.alt[locale]} width={shot.image.width} height={shot.image.height} loading="lazy" /> : <Image src={shot.image} alt={shot.alt[locale]} layout="constrained" widths={[360, 640]} sizes="(min-width: 1100px) 18vw, 40vw" loading="lazy" />}
       </a>)}</div>}

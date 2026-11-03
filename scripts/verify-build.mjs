@@ -43,7 +43,17 @@ for (const page of pages) {
   assert.ok(!html.includes('class="preview-banner"'), `${page.file}: visible preview banner`);
   assert.ok(!html.includes('class="demo-label"'), `${page.file}: repeated demo label`);
   if (preview && page.name === 'portfolio') {
-    assert.ok(html.includes(page.lang === 'en' ? 'Concept projects — illustrative website and software designs.' : 'ผลงานแนวคิดการออกแบบเว็บไซต์และระบบซอฟต์แวร์'), `${page.file}: concept disclosure`);
+    assert.ok(html.includes(page.lang === 'en' ? 'The images and descriptions below are illustrative, not verified client deliveries.' : 'ภาพและคำอธิบายต่อไปนี้จัดทำเพื่อประกอบการนำเสนอ ไม่ใช่ผลงานที่ยืนยันว่าได้ส่งมอบให้ลูกค้า'), `${page.file}: concept disclosure`);
+  }
+  if (page.name === 'portfolio') {
+    assert.ok(!html.includes('class="tile-facts"'), `${page.file}: no technical fact rows`);
+    if (preview) {
+      const cards = html.match(/<article\b[\s\S]*?<\/article>/g) ?? [];
+      for (const card of cards) {
+        const visible = card.replace(/<[^>]*>/g, ' ');
+        assert.doesNotMatch(visible, /\b(?:concept|sample|demo|TypeScript|Astro)\b|แนวคิด|ตัวอย่าง/i, `${page.file}: card labels or technology`);
+      }
+    }
   }
   if (!preview) {
     assert.ok(!html.includes('data-demo-project='), `${page.file}: demo project in production`);
