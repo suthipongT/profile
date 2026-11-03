@@ -46,7 +46,7 @@ h1, h2, h3 { overflow-wrap: anywhere; }
 .hero-center h1 span, .about-hero h1 span { color: #496671; }
 .hero-intro { max-width: 690px; margin: 0 auto; color: #56656d; font-size: clamp(.98rem, 1.5vw, 1.13rem); line-height: 1.8; }
 .hero-buttons { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .75rem; margin-top: 2.2rem; }
-.hero-services { margin: 3.2rem 0 0; color: #72838b; font-size: .68rem; font-weight: 600; letter-spacing: .14em; }
+.hero-services { margin: 3.2rem 0 0; color: #64757d; font-size: .68rem; font-weight: 600; letter-spacing: .14em; }
 .hero-center > * { animation: arrive .55s ease-out both; }.hero-center > :nth-child(2) { animation-delay: .07s; }.hero-center > :nth-child(3) { animation-delay: .13s; }.hero-center > :nth-child(4) { animation-delay: .2s; }.hero-center > :nth-child(5) { animation-delay: .27s; }
 .featured-section { padding: 6.4rem 0 7rem; }
 .center-heading { max-width: 760px; margin: 0 auto 3.2rem; text-align: center; }
