@@ -39,7 +39,6 @@ export const pagesCopy = {
     steps: ['Discovery', 'Solution planning', 'Development & review', 'Launch & handover'],
     contactTitle: 'Let’s discuss your project', contactIntro: 'Explore the services available for your business website or software project.',
     messageTitle: 'Project inquiries', contactInfoTitle: 'Explore the approach',
-    contactNotice: 'This contact form is being prepared and cannot send messages yet.',
     contactFields: { name: 'Name', namePlaceholder: 'Your name', email: 'Email', emailPlaceholder: 'Your email address', type: 'Project type', choose: 'Select a project type', corporate: 'Corporate website', crm: 'CRM', cms: 'CMS', erp: 'ERP / business management', other: 'Other', message: 'Message', messagePlaceholder: 'Tell us about your project', helper: 'Please do not include confidential information.', required: 'All fields are required.', submit: 'Send inquiry' },
     connectBody: 'Learn more about the approach to websites and business software.',
     meta: {
@@ -75,10 +74,9 @@ export const pagesCopy = {
     skillsTitle: 'ทักษะและแนวทาง', skillsIntro: 'ความสามารถที่มีตัวอย่างให้เห็นในพอร์ตโฟลิโอนี้',
     processTitle: 'ขั้นตอนทำงานเบื้องต้น', processIntro: 'แนวทางพูดคุยและส่งมอบโครงการ โดยตกลงขอบเขตสำหรับแต่ละงาน',
     steps: ['ทำความเข้าใจงาน', 'วางแผนแนวทาง', 'พัฒนาและทบทวน', 'เผยแพร่และส่งมอบ'],
-    contactTitle: 'มาคุยเรื่องโครงการของคุณ', contactIntro: 'สำรวจบริการสำหรับโครงการเว็บไซต์ธุรกิจหรือซอฟต์แวร์ของคุณ',
-    messageTitle: 'สอบถามเรื่องโครงการ', contactInfoTitle: 'รู้จักแนวทางการทำงาน',
-    contactNotice: 'แบบฟอร์มอยู่ระหว่างการเตรียมเปิดใช้งาน ยังไม่สามารถส่งข้อความได้ในขณะนี้',
-    contactFields: { name: 'ชื่อ', namePlaceholder: 'ชื่อของคุณ', email: 'อีเมล', emailPlaceholder: 'อีเมลของคุณ', type: 'ประเภทโครงการ', choose: 'เลือกประเภทโครงการ', corporate: 'เว็บไซต์องค์กร', crm: 'ระบบ CRM', cms: 'ระบบ CMS', erp: 'ระบบ ERP / บริหารธุรกิจ', other: 'อื่น ๆ', message: 'ข้อความ', messagePlaceholder: 'บอกเราเกี่ยวกับโครงการของคุณ', helper: 'โปรดอย่าใส่ข้อมูลที่เป็นความลับ', required: 'กรุณากรอกข้อมูลทุกช่อง', submit: 'ส่งข้อความติดต่อ' },
+    contactTitle: 'มาคุยเรื่องโปรเจกต์งานของคุณ', contactIntro: 'สำรวจบริการสำหรับโปรเจกต์งานเว็บไซต์ธุรกิจหรือซอฟต์แวร์ของคุณ',
+    messageTitle: 'สอบถามเรื่องโปรเจกต์งาน', contactInfoTitle: 'รู้จักแนวทางการทำงาน',
+    contactFields: { name: 'ชื่อ', namePlaceholder: 'ชื่อของคุณ', email: 'อีเมล', emailPlaceholder: 'อีเมลของคุณ', type: 'ประเภทโปรเจกต์งาน', choose: 'เลือกประเภทโปรเจกต์งาน', corporate: 'เว็บไซต์องค์กร', crm: 'ระบบ CRM', cms: 'ระบบ CMS', erp: 'ระบบ ERP / บริหารธุรกิจ', other: 'อื่น ๆ', message: 'รายละเอียดโปรเจกต์งาน', messagePlaceholder: 'บอกเราเกี่ยวกับโปรเจกต์งานของคุณ', helper: 'โปรดอย่าใส่ข้อมูลที่เป็นความลับ', required: 'กรุณากรอกข้อมูลทุกช่อง', submit: 'ส่งข้อความติดต่อ' },
     connectBody: 'เรียนรู้เพิ่มเติมเกี่ยวกับแนวทางพัฒนาเว็บไซต์และซอฟต์แวร์ธุรกิจ',
     meta: {
       home: ['Suthipong Toonritsa | เว็บไซต์ธุรกิจและซอฟต์แวร์', 'พัฒนาเว็บไซต์องค์กรและซอฟต์แวร์ธุรกิจเฉพาะงาน ทั้งระบบ CRM, CMS และ ERP'],

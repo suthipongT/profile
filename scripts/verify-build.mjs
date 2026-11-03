@@ -63,7 +63,8 @@ for (const page of pages) {
   if (page.name === 'contact') {
     assert.ok(!html.includes('<form'), `${page.file}: native submission must be unavailable`);
     assert.ok(html.includes('role="form"'), `${page.file}: form landmark`);
-    assert.ok(html.includes(page.lang === 'en' ? 'This contact form is being prepared and cannot send messages yet.' : 'แบบฟอร์มอยู่ระหว่างการเตรียมเปิดใช้งาน ยังไม่สามารถส่งข้อความได้ในขณะนี้'), `${page.file}: unavailable notice`);
+    assert.ok(!html.includes('This contact form is being prepared and cannot send messages yet.') && !html.includes('แบบฟอร์มอยู่ระหว่างการเตรียมเปิดใช้งาน ยังไม่สามารถส่งข้อความได้ในขณะนี้'), `${page.file}: unavailable notice absent`);
+    if (page.lang === 'th') assert.ok(html.includes('ประเภทโปรเจกต์งาน') && html.includes('รายละเอียดโปรเจกต์งาน'), `${page.file}: Thai terminology`);
     for (const id of ['contact-name', 'contact-email', 'contact-type', 'contact-message']) {
       assert.ok(html.includes(`for="${id}"`) && html.includes(`id="${id}"`), `${page.file}: labeled ${id}`);
     }
