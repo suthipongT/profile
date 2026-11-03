@@ -111,7 +111,7 @@ for (const lang of ['en', 'th']) {
 
 const css = readdirSync('dist/_astro').filter((name) => name.endsWith('.css')).map((name) => readFileSync(`dist/_astro/${name}`, 'utf8')).join('');
 assert.ok(css.includes('position:sticky'), 'sticky header CSS missing');
-assert.ok(css.includes('#0b1d27'), 'required dark palette missing');
+assert.ok(css.includes('#01388e') && css.includes('#fbfcfe') && css.includes('#e3edfc'), 'required blue palette missing');
 const robots = readFileSync('dist/robots.txt', 'utf8');
 if (preview) {
   assert.ok(robots.includes('Disallow: /'), 'preview robots must disallow crawling');
