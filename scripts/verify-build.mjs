@@ -87,9 +87,12 @@ for (const page of pages) {
 for (const name of pageNames) {
   const segment = name === 'home' ? '' : `${name}/`;
   const html = readFileSync(`dist/th/${segment}index.html`, 'utf8');
-  assert.ok(html.includes('content="noindex, follow"'), `legacy ${name}: noindex`);
+  const robots = preview ? 'noindex, nofollow, noarchive' : 'noindex, follow';
+  assert.ok(html.includes(`<meta name="robots" content="${robots}"`), `legacy ${name}: robots ${robots}`);
   assert.ok(html.includes(`rel="canonical" href="${site}${base}${segment}"`), `legacy ${name}: canonical`);
   assert.ok(html.includes(`content="0;url=${base}${segment}"`), `legacy ${name}: redirect`);
+  assert.ok(html.includes(`href="${base}${segment}"`), `legacy ${name}: fallback link`);
+  console.log(`PASS legacy ${name}: robots, canonical, redirect and fallback`);
 }
 
 for (const lang of ['en', 'th']) {
