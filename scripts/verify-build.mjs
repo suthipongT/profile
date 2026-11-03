@@ -61,8 +61,13 @@ for (const page of pages) {
   }
   assert.ok(!/href=["']https?:\/\/(?:[^/]+\.)?github\.com(?:[/:?#]|["'])/i.test(html), `${page.file}: GitHub navigation`);
   if (page.name === 'contact') {
-    assert.ok(!html.includes('<form'), `${page.file}: contact form would collect data`);
-    assert.ok(html.includes(page.lang === 'en' ? 'A contact channel is not available yet.' : 'ขณะนี้ยังไม่มีช่องทางติดต่อ'), `${page.file}: contact availability`);
+    assert.ok(!html.includes('<form'), `${page.file}: native submission must be unavailable`);
+    assert.ok(html.includes('role="form"'), `${page.file}: form landmark`);
+    assert.ok(html.includes(page.lang === 'en' ? 'This contact form is being prepared and cannot send messages yet.' : 'แบบฟอร์มอยู่ระหว่างการเตรียมเปิดใช้งาน ยังไม่สามารถส่งข้อความได้ในขณะนี้'), `${page.file}: unavailable notice`);
+    for (const id of ['contact-name', 'contact-email', 'contact-type', 'contact-message']) {
+      assert.ok(html.includes(`for="${id}"`) && html.includes(`id="${id}"`), `${page.file}: labeled ${id}`);
+    }
+    assert.match(html, /<button\b[^>]*type="button"[^>]*disabled/, `${page.file}: disabled button`);
   }
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const url = match[1];

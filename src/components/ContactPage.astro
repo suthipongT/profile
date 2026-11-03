@@ -7,6 +7,7 @@ import { pagesCopy, pagePath } from '../content/pages';
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = pagesCopy[locale];
+const f = t.contactFields;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 <BaseLayout locale={locale} page="contact">
@@ -14,7 +15,15 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   <div class="container contact-grid">
     <section class="contact-message" aria-labelledby="message-title">
       <h2 id="message-title">{t.messageTitle}</h2>
-      <div class="contact-prompt"><p>{t.contactInfoBody}</p><a class="button button-dark" href={pagePath(base, locale, 'portfolio')}>{t.viewAll} <ActionIcon name="arrow-right" /></a></div>
+      <div class="contact-form" role="form" aria-labelledby="message-title" aria-describedby="contact-notice contact-required">
+        <p id="contact-notice" class="contact-notice">{t.contactNotice}</p>
+        <p id="contact-required" class="contact-helper">{f.required}</p>
+        <div class="contact-field"><label for="contact-name">{f.name}</label><input id="contact-name" type="text" placeholder={f.namePlaceholder} maxlength="100" autocomplete="off" required /></div>
+        <div class="contact-field"><label for="contact-email">{f.email}</label><input id="contact-email" type="email" placeholder={f.emailPlaceholder} maxlength="254" autocomplete="off" required /></div>
+        <div class="contact-field"><label for="contact-type">{f.type}</label><select id="contact-type" required><option value="" selected disabled>{f.choose}</option><option value="corporate">{f.corporate}</option><option value="crm">{f.crm}</option><option value="cms">{f.cms}</option><option value="erp">{f.erp}</option><option value="other">{f.other}</option></select></div>
+        <div class="contact-field"><label for="contact-message">{f.message}</label><textarea id="contact-message" placeholder={f.messagePlaceholder} minlength="10" maxlength="3000" rows="5" aria-describedby="contact-message-help" required></textarea><p id="contact-message-help" class="contact-helper">{f.helper}</p></div>
+        <button class="button button-dark" type="button" disabled aria-describedby="contact-notice">{f.submit}</button>
+      </div>
     </section>
     <section class="contact-information" aria-labelledby="contact-info-title">
       <h2 id="contact-info-title">{t.contactInfoTitle}</h2>
