@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ActionIcon from './ActionIcon.astro';
 import type { Locale } from '../content/site';
 import { pagesCopy } from '../content/pages';
 
@@ -12,12 +13,12 @@ const t = pagesCopy[locale];
   <div class="container contact-grid">
     <section class="contact-message" aria-labelledby="message-title">
       <h2 id="message-title">{t.messageTitle}</h2>
-      <div class="contact-prompt"><p>{t.contactInfoBody}</p><a class="button button-dark" href="https://github.com/suthipongT" target="_blank" rel="noopener noreferrer">{t.github} <span aria-hidden="true">↗</span></a></div>
+      <div class="contact-prompt"><p>{t.contactInfoBody}</p><a class="button button-dark" href="https://github.com/suthipongT" target="_blank" rel="noopener noreferrer">{t.github} <ActionIcon name="external" /></a></div>
     </section>
     <section class="contact-information" aria-labelledby="contact-info-title">
       <h2 id="contact-info-title">{t.contactInfoTitle}</h2>
-      <div class="contact-info-item"><span class="contact-info-icon" aria-hidden="true">↗</span><div><span>GitHub</span><a href="https://github.com/suthipongT" target="_blank" rel="noopener noreferrer">github.com/suthipongT</a></div></div>
-      <div class="contact-connect"><h3>{t.connectTitle}</h3><p>{t.connectBody}</p><a class="button button-dark" href="https://github.com/suthipongT" target="_blank" rel="noopener noreferrer">{t.github} <span aria-hidden="true">↗</span></a></div>
+      <div class="contact-info-item"><span class="contact-info-icon" aria-hidden="true"><ActionIcon name="github" /></span><div><span>GitHub</span><a href="https://github.com/suthipongT" target="_blank" rel="noopener noreferrer">github.com/suthipongT</a></div></div>
+      <div class="contact-connect"><h3>{t.connectTitle}</h3><p>{t.connectBody}</p><a class="button button-dark" href="https://github.com/suthipongT" target="_blank" rel="noopener noreferrer">{t.github} <ActionIcon name="external" /></a></div>
     </section>
   </div>
 </BaseLayout>

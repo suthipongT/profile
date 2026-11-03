@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ActionIcon from '../components/ActionIcon.astro';
 import type { Locale } from '../content/site';
 import { pagePath, pagesCopy, type Page } from '../content/pages';
 
@@ -66,7 +67,7 @@ const navPages: Page[] = ['home', 'portfolio', 'about', 'contact'];
     <main id="main"><slot /></main>
     <footer class="site-footer">
       <div class="container footer-grid">
-        <div><a class="footer-brand" href={pagePath(base, locale, 'home')}>Suthipong<span>.</span></a><p>{t.footerBody}</p><a class="footer-github" href="https://github.com/suthipongT" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+        <div><a class="footer-brand" href={pagePath(base, locale, 'home')}>Suthipong<span>.</span></a><p>{t.footerBody}</p><a class="footer-github" href="https://github.com/suthipongT" target="_blank" rel="noopener noreferrer">GitHub <ActionIcon name="external" /></a></div>
         <nav aria-label={t.footerLinks}><strong>{t.footerLinks}</strong>{navPages.map((item) => <a href={pagePath(base, locale, item)}>{t.nav[item]}</a>)}</nav>
       </div>
       <div class="container footer-bottom"><span>© {new Date().getFullYear()} Suthipong Toonritsa</span><span>{t.footerNote}</span></div>

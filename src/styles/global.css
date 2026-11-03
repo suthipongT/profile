@@ -62,6 +62,8 @@ h1, h2, h3 { overflow-wrap: anywhere; }
 .gallery-section { padding-bottom: 7.2rem; }
 .filter-list { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .55rem; margin: 0 0 3rem; }
 .filter-button { display: inline-flex; align-items: center; justify-content: center; gap: .45rem; min-height: 40px; padding: .5rem 1.1rem; border: 1px solid #e4e9eb; border-radius: 999px; background: #f1f3f4; color: #233640; font-size: .875rem; font-weight: 500; transition: background .2s ease, color .2s ease; }
+.action-icon { display: inline-block; width: 1em; height: 1em; flex: none; vertical-align: -.12em; }
+.contact-info-icon .action-icon { width: 1.2rem; height: 1.2rem; }
 .category-icon { width: 1rem; height: 1rem; flex: none; }
 .filter-button:hover { background: #e2e8eb; }.filter-button[aria-pressed="true"] { border-color: #0b1d27; background: #0b1d27; color: #fff; }
 .portfolio-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 3rem 1.5rem; align-items: start; }

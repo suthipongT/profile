@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import ActionIcon from './ActionIcon.astro';
 import type { Locale } from '../content/site';
 import type { ShowcaseProject } from '../content/projects';
 import { copy } from '../content/site';
@@ -19,7 +20,7 @@ const imageSrc = (src: string) => src.startsWith(base) ? src : `${base}${src.rep
       ? <img src={imageSrc(lead.image.src)} alt={lead.alt[locale]} width={lead.image.width} height={lead.image.height} loading={compact ? 'eager' : 'lazy'} decoding="async" />
       : <Image src={lead.image} alt={lead.alt[locale]} layout="constrained" widths={[480, 768, 1200]} sizes="(min-width: 1100px) 33vw, (min-width: 700px) 50vw, 100vw" loading={compact ? 'eager' : 'lazy'} decoding="async" />}
     <span class="tile-image-overlay" aria-hidden="true"><small>{copy[locale].categoryLabels[project.category]}</small><strong>{content.name}</strong></span>
-    <span class="tile-image-action" aria-hidden="true">↗</span>
+    <span class="tile-image-action" aria-hidden="true"><ActionIcon name="external" /></span>
   </a>}
   <div class="tile-content">
     <p class="tile-category">{copy[locale].categoryLabels[project.category]}</p>
@@ -35,7 +36,7 @@ const imageSrc = (src: string) => src.startsWith(base) ? src : `${base}${src.rep
       {supporting.length > 0 && <div class="tile-supporting">{supporting.map((shot) => <a href={imageSrc(shot.image.src)} target="_blank" rel="noopener noreferrer" aria-label={`${t.imageLink}: ${content.name}`}>
         {shot.image.format === 'svg' ? <img src={imageSrc(shot.image.src)} alt={shot.alt[locale]} width={shot.image.width} height={shot.image.height} loading="lazy" /> : <Image src={shot.image} alt={shot.alt[locale]} layout="constrained" widths={[360, 640]} sizes="(min-width: 1100px) 18vw, 40vw" loading="lazy" />}
       </a>)}</div>}
-      {(project.liveUrl || project.repositoryUrl) && <div class="tile-links">{project.liveUrl && <a href={project.liveUrl}>{copy[locale].projectLiveLabel} ↗</a>}{project.repositoryUrl && <a href={project.repositoryUrl}>{copy[locale].projectRepositoryLabel} ↗</a>}</div>}
+      {(project.liveUrl || project.repositoryUrl) && <div class="tile-links">{project.liveUrl && <a href={project.liveUrl}>{copy[locale].projectLiveLabel} <ActionIcon name="external" /></a>}{project.repositoryUrl && <a href={project.repositoryUrl}>{copy[locale].projectRepositoryLabel} <ActionIcon name="external" /></a>}</div>}
     </>}
   </div>
 </article>

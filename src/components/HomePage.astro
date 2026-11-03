@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ActionIcon from './ActionIcon.astro';
 import ProjectTile from './ProjectTile.astro';
 import type { Locale } from '../content/site';
 import { pagesCopy, pagePath } from '../content/pages';
@@ -18,7 +19,7 @@ const projects = preview ? (await import('../content/demo-projects')).demoProjec
       <h1 id="home-title">{t.heroLead}<br /><span>{t.heroFocus}</span></h1>
       <p class="hero-intro">{t.heroBody}</p>
       <div class="hero-buttons">
-        <a class="button button-dark" href={pagePath(base, locale, 'portfolio')}>{t.heroWork} <span aria-hidden="true">↗</span></a>
+        <a class="button button-dark" href={pagePath(base, locale, 'portfolio')}>{t.heroWork} <ActionIcon name="arrow-right" /></a>
         <a class="button button-outline" href={pagePath(base, locale, 'contact')}>{t.heroContact}</a>
       </div>
       <p class="hero-services" aria-label={t.servicesTitle}>{locale === 'en' ? 'CORPORATE WEBSITES  /  CRM  /  CMS  /  ERP' : 'เว็บไซต์องค์กร  /  CRM  /  CMS  /  ERP'}</p>
@@ -28,7 +29,7 @@ const projects = preview ? (await import('../content/demo-projects')).demoProjec
     <div class="container">
       <div class="center-heading"><h2 id="featured-title">{t.featuredTitle}</h2><p>{preview ? t.featuredPreview : t.featuredProduction}</p></div>
       {projects.length > 0 ? <div class="featured-grid">{projects.slice(0, 2).map((project) => <ProjectTile project={project} locale={locale} demo={preview} compact />)}</div> : <div class="empty-state"><h3>{t.emptyTitle}</h3><p>{t.emptyBody}</p></div>}
-      <div class="center-action"><a class="button button-outline" href={pagePath(base, locale, 'portfolio')}>{t.viewAll} <span aria-hidden="true">→</span></a></div>
+      <div class="center-action"><a class="button button-outline" href={pagePath(base, locale, 'portfolio')}>{t.viewAll} <ActionIcon name="arrow-right" /></a></div>
     </div>
   </section>
 </BaseLayout>
