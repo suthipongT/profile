@@ -41,5 +41,5 @@ export default defineConfig({
   base: preview ? previewBase : '/profile',
   output: 'static',
   trailingSlash: 'always',
-  integrations: preview ? [previewArtwork] : [sitemap()],
+  integrations: preview ? [previewArtwork] : [sitemap({ filter: (page) => !new URL(page).pathname.startsWith('/profile/th/') })],
 });

@@ -7,7 +7,7 @@ export const pageSegments: Record<Page, string> = {
 };
 
 export function pagePath(base: string, locale: Locale, page: Page): string {
-  return `${base}${locale === 'th' ? 'th/' : ''}${pageSegments[page]}`;
+  return `${base}${locale === 'en' ? 'en/' : ''}${pageSegments[page]}`;
 }
 
 export const pagesCopy = {

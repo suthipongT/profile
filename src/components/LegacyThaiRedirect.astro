@@ -1,0 +1,22 @@
+---
+// GitHub Pages serves this static noindex meta-refresh and fallback link, not an HTTP redirect.
+// The production sitemap excludes these aliases; canonical URLs point to Thai root pages.
+import { pagePath, type Page } from '../content/pages';
+interface Props { page: Page }
+const { page } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const target = pagePath(base, 'th', page);
+const canonical = new URL(target, Astro.site).href;
+---
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={canonical} />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <title>เปลี่ยนเส้นทาง</title>
+  </head>
+  <body><p>หน้านี้ย้ายแล้ว <a href={target}>ไปยังหน้าใหม่</a></p></body>
+</html>

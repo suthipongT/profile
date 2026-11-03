@@ -9,7 +9,7 @@ const base = preview ? `${(process.env.PUBLIC_PORTFOLIO_PREVIEW_BASE ?? '/profil
 const pageNames = ['home', 'portfolio', 'about', 'contact'];
 const pages = ['en', 'th'].flatMap((lang) => pageNames.map((name) => {
   const segment = name === 'home' ? '' : `${name}/`;
-  const locale = lang === 'th' ? 'th/' : '';
+  const locale = lang === 'en' ? 'en/' : '';
   return { lang, name, path: `${base}${locale}${segment}`, file: `dist/${locale}${segment}index.html` };
 }));
 
@@ -23,10 +23,12 @@ for (const page of pages) {
   assert.ok(html.includes(`rel="canonical" href="${site}${page.path}"`), `${page.file}: canonical`);
   assert.ok(html.includes(`property="og:url" content="${site}${page.path}"`), `${page.file}: Open Graph URL`);
   for (const locale of ['en', 'th']) {
-    const localePath = `${base}${locale === 'th' ? 'th/' : ''}${page.name === 'home' ? '' : `${page.name}/`}`;
+    const localePath = `${base}${locale === 'en' ? 'en/' : ''}${page.name === 'home' ? '' : `${page.name}/`}`;
     assert.ok(html.includes(`hreflang="${locale}" href="${site}${localePath}"`), `${page.file}: ${locale} alternate`);
     assert.ok(html.includes(`href="${localePath}"`), `${page.file}: ${locale} switch`);
   }
+  const thaiPath = `${base}${page.name === 'home' ? '' : `${page.name}/`}`;
+  assert.ok(html.includes(`hreflang="x-default" href="${site}${thaiPath}"`), `${page.file}: Thai x-default`);
   const expectedDemoCount = preview ? page.name === 'portfolio' ? 4 : page.name === 'home' ? 2 : 0 : 0;
   assert.equal((html.match(/data-demo-project=/g) ?? []).length, expectedDemoCount, `${page.file}: demo isolation`);
   assert.ok(!html.includes('class="preview-banner"'), `${page.file}: visible preview banner`);
@@ -55,6 +57,14 @@ for (const page of pages) {
   console.log(`PASS ${page.file}: route, localization, metadata, links, isolation`);
 }
 
+for (const name of pageNames) {
+  const segment = name === 'home' ? '' : `${name}/`;
+  const html = readFileSync(`dist/th/${segment}index.html`, 'utf8');
+  assert.ok(html.includes('content="noindex, follow"'), `legacy ${name}: noindex`);
+  assert.ok(html.includes(`rel="canonical" href="${site}${base}${segment}"`), `legacy ${name}: canonical`);
+  assert.ok(html.includes(`content="0;url=${base}${segment}"`), `legacy ${name}: redirect`);
+}
+
 const css = readdirSync('dist/_astro').filter((name) => name.endsWith('.css')).map((name) => readFileSync(`dist/_astro/${name}`, 'utf8')).join('');
 assert.ok(css.includes('position:sticky'), 'sticky header CSS missing');
 assert.ok(css.includes('#0b1d27'), 'required dark palette missing');
@@ -67,6 +77,7 @@ if (preview) {
 } else {
   assert.ok(!existsSync('dist/demo'), 'demo artwork must be absent from production');
   const sitemap = readFileSync('dist/sitemap-0.xml', 'utf8');
+  assert.ok(!sitemap.includes(`${site}${base}th/`), 'sitemap: legacy Thai URLs excluded');
   for (const page of pages) assert.ok(sitemap.includes(`<loc>${site}${page.path}</loc>`), `sitemap: ${page.path}`);
   assert.ok(robots.includes(`${site}${base}sitemap-index.xml`), 'robots: sitemap URL');
   console.log('PASS production sitemap, robots, and demo exclusion');
