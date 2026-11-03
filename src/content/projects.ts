@@ -23,3 +23,23 @@ export type ShowcaseProject = Project | DemoProject;
 // Add only verified projects with publication approval. Local screenshots belong in src/assets/projects/.
 export const projects: readonly Project[] = [];
 export const approvedProjects = projects.filter((project) => project.status === 'approved');
+
+// Keep source order so editors control the presentation order.
+export function featuredProjects<T extends { featured: boolean }>(items: readonly T[]): T[] {
+  return items.filter((item) => item.featured === true).slice(0, 2);
+}
+
+// A single, stable slug defines each Portfolio fragment and must be unique per build.
+export function validateProjectSlugs(items: readonly { slug: string }[]): void {
+  const seen = new Set<string>();
+  for (const { slug } of items) {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || seen.has(slug)) {
+      throw new Error(`Invalid or duplicate project slug: ${slug}`);
+    }
+    seen.add(slug);
+  }
+}
+
+export function projectAnchor(slug: string): string {
+  return `project-${slug}`;
+}

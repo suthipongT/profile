@@ -5,13 +5,14 @@ import CategoryIcon from './CategoryIcon.astro';
 import type { Locale } from '../content/site';
 import { copy } from '../content/site';
 import { pagesCopy } from '../content/pages';
-import { approvedProjects } from '../content/projects';
+import { approvedProjects, validateProjectSlugs } from '../content/projects';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = pagesCopy[locale];
 const preview = import.meta.env.PUBLIC_PORTFOLIO_PREVIEW === 'true';
 const projects = preview ? (await import('../content/demo-projects')).demoProjects : approvedProjects;
+validateProjectSlugs(projects);
 const categories = ['corporate-website', 'crm', 'cms', 'erp-business-management'] as const;
 ---
 <BaseLayout locale={locale} page="portfolio">
@@ -28,6 +29,18 @@ const categories = ['corporate-website', 'crm', 'cms', 'erp-business-management'
   <script>
     const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
     const tiles = [...document.querySelectorAll<HTMLElement>('.portfolio-grid .project-tile')];
+    const revealHashTarget = () => {
+      const tile = tiles.find((item) => `#${item.id}` === window.location.hash);
+      if (!tile) return;
+      if (tile.hidden) {
+        tiles.forEach((item) => { item.hidden = false; });
+        buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.filter === 'all')));
+      }
+      tile.focus({ preventScroll: true });
+      tile.scrollIntoView({ block: 'start' });
+    };
+    window.addEventListener('hashchange', revealHashTarget);
+    revealHashTarget();
     buttons.forEach((button) => button.addEventListener('click', () => {
       const value = button.dataset.filter;
       buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));

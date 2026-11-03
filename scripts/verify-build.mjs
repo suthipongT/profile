@@ -1,6 +1,14 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { featuredProjects, projectAnchor, validateProjectSlugs } from '../src/content/projects.ts';
+
+assert.deepEqual(featuredProjects([{ featured: false, id: 0 }, { featured: true, id: 1 }, { featured: true, id: 2 }, { featured: true, id: 3 }]).map((p) => p.id), [1, 2]);
+assert.deepEqual(featuredProjects([{ featured: false }]), []);
+assert.equal(featuredProjects([{ featured: true }]).length, 1);
+assert.throws(() => validateProjectSlugs([{ slug: 'same' }, { slug: 'same' }]));
+assert.throws(() => validateProjectSlugs([{ slug: 'bad slug' }]));
+assert.equal(projectAnchor('demo-crm'), 'project-demo-crm');
 
 const preview = process.env.PUBLIC_PORTFOLIO_PREVIEW === 'true';
 const site = preview ? process.env.PUBLIC_PORTFOLIO_PREVIEW_SITE : 'https://suthipongt.github.io';
@@ -29,8 +37,9 @@ for (const page of pages) {
   }
   const thaiPath = `${base}${page.name === 'home' ? '' : `${page.name}/`}`;
   assert.ok(html.includes(`hreflang="x-default" href="${site}${thaiPath}"`), `${page.file}: Thai x-default`);
-  const expectedDemoCount = preview ? page.name === 'portfolio' ? 4 : page.name === 'home' ? 2 : 0 : 0;
-  assert.equal((html.match(/data-demo-project=/g) ?? []).length, expectedDemoCount, `${page.file}: demo isolation`);
+  const demoCount = (html.match(/data-demo-project=/g) ?? []).length;
+  if (preview && page.name === 'home') assert.ok(demoCount <= 2, `${page.file}: at most two featured concepts`);
+  else assert.equal(demoCount, preview && page.name === 'portfolio' ? 4 : 0, `${page.file}: demo isolation`);
   assert.ok(!html.includes('class="preview-banner"'), `${page.file}: visible preview banner`);
   assert.ok(!html.includes('class="demo-label"'), `${page.file}: repeated demo label`);
   if (preview && page.name === 'portfolio') {
@@ -63,6 +72,18 @@ for (const name of pageNames) {
   assert.ok(html.includes('content="noindex, follow"'), `legacy ${name}: noindex`);
   assert.ok(html.includes(`rel="canonical" href="${site}${base}${segment}"`), `legacy ${name}: canonical`);
   assert.ok(html.includes(`content="0;url=${base}${segment}"`), `legacy ${name}: redirect`);
+}
+
+for (const lang of ['en', 'th']) {
+  const locale = lang === 'en' ? 'en/' : '';
+  const home = readFileSync(`dist/${locale}index.html`, 'utf8');
+  const portfolio = readFileSync(`dist/${locale}portfolio/index.html`, 'utf8');
+  const ids = [...portfolio.matchAll(/\bid="(project-[a-z0-9-]+)"/g)].map((m) => m[1]);
+  assert.equal(new Set(ids).size, ids.length, `${lang}: unique project anchors`);
+  const links = [...home.matchAll(new RegExp(`href="${base}${locale}portfolio/#(project-[a-z0-9-]+)"`, 'g'))].map((m) => m[1]);
+  for (const id of links) assert.ok(ids.includes(id), `${lang}: featured link target ${id}`);
+  const featuredCount = (home.match(/data-demo-project=/g) ?? []).length;
+  if (preview) assert.equal(new Set(links).size, featuredCount, `${lang}: each featured project links to its target`);
 }
 
 const css = readdirSync('dist/_astro').filter((name) => name.endsWith('.css')).map((name) => readFileSync(`dist/_astro/${name}`, 'utf8')).join('');

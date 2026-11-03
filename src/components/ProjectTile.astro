@@ -4,7 +4,8 @@ import ActionIcon from './ActionIcon.astro';
 import type { Locale } from '../content/site';
 import type { ShowcaseProject } from '../content/projects';
 import { copy } from '../content/site';
-import { pagesCopy } from '../content/pages';
+import { pagesCopy, pagePath } from '../content/pages';
+import { projectAnchor } from '../content/projects';
 import { publicLiveUrl } from '../utils/public-live-url';
 
 interface Props { project: ShowcaseProject; locale: Locale; demo: boolean; compact?: boolean }
@@ -14,19 +15,21 @@ const content = project.content[locale];
 const [lead, ...supporting] = project.screenshots ?? [];
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const imageSrc = (src: string) => src.startsWith(base) ? src : `${base}${src.replace(/^\//, '')}`;
+const anchor = projectAnchor(project.slug);
+const portfolioUrl = `${pagePath(base, locale, 'portfolio')}#${anchor}`;
 const liveUrl = !demo && 'status' in project && project.status === 'approved' ? publicLiveUrl(project.liveUrl) : undefined;
 ---
-<article class:list={['project-tile', { 'project-tile-text': !lead }]} data-demo-project={demo ? project.id : undefined} data-category={project.category}>
-  {lead && <a class="tile-image-link" href={imageSrc(lead.image.src)} target="_blank" rel="noopener noreferrer" aria-label={`${t.imageLink}: ${content.name}`}>
+<article id={compact ? undefined : anchor} tabindex={compact ? undefined : -1} aria-label={compact ? undefined : content.name} class:list={['project-tile', { 'project-tile-text': !lead }]} data-demo-project={demo ? project.id : undefined} data-category={project.category}>
+  {lead && <a class="tile-image-link" href={compact ? portfolioUrl : imageSrc(lead.image.src)} target={compact ? undefined : "_blank"} rel={compact ? undefined : "noopener noreferrer"} aria-label={compact ? `${t.projectDetails}: ${content.name}` : `${t.imageLink}: ${content.name}`}>
     {lead.image.format === 'svg'
       ? <img src={imageSrc(lead.image.src)} alt={lead.alt[locale]} width={lead.image.width} height={lead.image.height} loading={compact ? 'eager' : 'lazy'} decoding="async" />
       : <Image src={lead.image} alt={lead.alt[locale]} layout="constrained" widths={[480, 768, 1200]} sizes="(min-width: 1100px) 33vw, (min-width: 700px) 50vw, 100vw" loading={compact ? 'eager' : 'lazy'} decoding="async" />}
     <span class="tile-image-overlay" aria-hidden="true"><small>{copy[locale].categoryLabels[project.category]}</small><strong>{content.name}</strong></span>
-    <span class="tile-image-action" aria-hidden="true"><ActionIcon name="external" /></span>
+    <span class="tile-image-action" aria-hidden="true"><ActionIcon name={compact ? "arrow-right" : "external"} /></span>
   </a>}
   <div class="tile-content">
     <p class="tile-category">{copy[locale].categoryLabels[project.category]}</p>
-    <h3>{content.name}</h3>
+    <h3>{compact ? <a href={portfolioUrl}>{content.name}</a> : content.name}</h3>
     <p class="tile-summary">{content.summary}</p>
     {!compact && <>
       <p class="tile-description">{content.description}</p>
